@@ -1,0 +1,13 @@
+.m_left { width:75%; float:left;}
+.m_right {width:20%; float:right;}
+.mm_div {width:100px; height:15px; float:right; margin-right:30px;}
+.mm_sel { height:20px; float:right;}
+
+.wu {float:right;}
+
+.mar_b { margin-bottom:15px;}
+.addType{float:right;}
+
+
+/* 用户信息界面设置 */
+.useris { width:500px;}
