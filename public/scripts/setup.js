@@ -39,21 +39,7 @@ $(document).ready(function(){
     var i;
     for(i=0;i<tynale;i++) {
         var tynas = document.getElementsByClassName("tyna")[i].getElementsByTagName("td")[0].getElementsByTagName("input")[0];
-       // if(tynas.prop("")=="checked"){
-        //    document.getElementsByClassName("tyna")[i].css({"color":"#888"});
-            //document.getElementsByClassName("tyna")[i].style.color = 'red';
-       // }
-        //tynas.prop("checked")=
 
     }
 
-
-               // document.getElementById('sModify').onclick=btc;
-
-          //  }
-        //}
-    //}
-   // sMbj = new bjty();
-    //sMbj.tehicle();
-
-})
+});

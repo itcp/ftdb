@@ -67,7 +67,8 @@ Route::group(array('namespace'=>'Meeting'),function(){
 
 //  客户通讯录组
 Route::group(array('namespace'=>'CommunicationRecord'),function(){
-    Route::get('cus/add','CommunicationController@addview');
+    Route::get('cus/add','CommunicationController@addView');
+    Route::post('cuspro','CommunicationController@pos');
     Route::post('cusadd','CommunicationController@add');
 });
 

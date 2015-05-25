@@ -5,5 +5,5 @@ class Customers extends \Eloquent {
 
     public $timestamps = false;
 
-	protected $fillable = ['id','company','contact','sex','telephone','phone','email','relationship_between_state','province','city','address','reason','release_time'];
+	protected $fillable = ['id','company','contact','position','sex','telephone','phone','email','relationship_between_state','province','city','address','reason','release_time','remarks','deitor'];
 }

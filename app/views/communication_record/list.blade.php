@@ -40,7 +40,7 @@
                             <th>联系人</th>
                            <!-- <th>职位</th>-->
                             <th>电话</th>
-                            <th>手机</th>
+
                             <th>邮箱</th>
 
                             <th>地址</th>
@@ -68,6 +68,9 @@
                                 <td>{{ $custs[$i]['email']}}</td>
                                 <td>{{ $custs[$i]['address'] }}</td>
                                 <td>{{ $custs[$i]['relationship_between_state'] }}</td>
+                                <td>{{ $custs[$i]['reason'] }}</td>
+                                <td>{{ $custs[$i]['release_time'] }}</td>
+                                <td>{{ $custs[$i]['editor'] }}</td>
                                 <td>{{ $custs[$i]['remarks'] }}</td>
                             </tr>
                             @endfor

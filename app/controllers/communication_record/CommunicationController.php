@@ -6,7 +6,7 @@ namespace CommunicationRecord;
  * Date: 2015/5/6
  * Time: 17:33
  */
-use BaseController, Form, Input, Redirect, Sentry, View,User,Auth,Customers,SetType,TypeRecord,Provinces,Citys;
+use BaseController, Form, Input, Redirect, Sentry, View,User,Auth,Customers,SetType,TypeRecord,Provinces,Citys,Request;
 // 客户通讯录
 class CommunicationController extends \BaseController{
 
@@ -27,12 +27,9 @@ class CommunicationController extends \BaseController{
                 $custs[$i]['telephone'] = $cus->telephone;
                 $custs[$i]['phone'] = $cus->phone;
                 $custs[$i]['email'] = $cus->email;
-                $custs[$i]['qq'] = $cus->qq;
-                $custs[$i]['wechat'] = $cus->wechat;
 
-                //$custs[$i]['identity'] = $cus->identiy;
+                $custs[$i]['relationship_between_state'] = $cus->relationship_between_state;
 
-                $custs[$i]['registration_time'] = $cus->registration_time;
 
                 $custs[$i]['province'] = $cus->province;
 
@@ -46,6 +43,11 @@ class CommunicationController extends \BaseController{
                 $custs[$i]['editor'] = $cus->editor;
                 $i++;
             }
+            /*
+             * @foreach($city as $ciy)
+                                    <option value="{{ $ciy['id'] }}">{{ $ciy['city_name'] }}</option>
+                                @endforeach
+             * */
             return View::make('communication_record.list')->with(array('custs' => $custs));
         }else{
             $us_na = Auth::user()->name;
@@ -56,14 +58,13 @@ class CommunicationController extends \BaseController{
             foreach ($cust as $cus) {
                 $custs[$i]['id'] = $cus->id;
                 $custs[$i]['company'] = $cus->company;
+                $custs[$i]['contact'] = $cus->contact;
                 $custs[$i]['position'] = $cus->position;
                 $custs[$i]['sex'] = $cus->sex;
                 $custs[$i]['telephone'] = $cus->telephone;
                 $custs[$i]['phone'] = $cus->phone;
                 $custs[$i]['email'] = $cus->email;
-                $custs[$i]['qq'] = $cus->qq;
-                $custs[$i]['provin'] = $cus->wechat;
-                $custs[$i]['identity'] = $cus->identiy;
+
 
                 $custs[$i]['relationship_between_state'] = $cus->relationship_between_state;
 
@@ -84,7 +85,7 @@ class CommunicationController extends \BaseController{
 
     }
     //  添加页面视图组装
-    protected function addview(){
+    protected function addView(){
         $cust = SetType::where('type_name', '=','合作状态')->take(10)->get();
       //  $cus=array();
         $stid='';
@@ -115,10 +116,33 @@ class CommunicationController extends \BaseController{
     }
 
     protected function add(){
+       // if(Request::ajax()){
+            $name = Auth::user()->name;
 
-        $name = Auth::user()->name;
+            $couadd = Customers::create(array('company' => $_POST['company'],'contact'=>$_POST['contact'],'position'=> $_POST['position'],'sex'=> $_POST['sex'],'telephone'=> $_POST['telephone'],'phone'=> $_POST['phone'],'email'=> $_POST['email'],'relationship_between_state'=> $_POST['rbs'],'province'=> $_POST['province'],'city'=> $_POST['city'],'address'=> $_POST['address'],'reason'=> $_POST['reason'],'remarks'=>$_POST['remarks'],'editor'=>$name));
+            if(1==true){
+                echo $_POST;
+            }else{
+                echo 2;
+            }
 
-        $reason = Customers::create(array('company' => $_POST['company'],'contact'=>$_POST['contact'],'position'=> $_POST['position'],'sex'=> $_POST['sex'],'telephone'=> $_POST['telephone'],'phone'=> $_POST['phone'],'email'=> $_POST['email'],'relationship_between_state'=> $_POST['rbs'],'province'=> $_POST['province'],'city'=> $_POST['city'],'address'=> $_POST['address'],'reason'=> $_POST['reason'],'remarks'=>$_POST['remarks'],'editor'=>$name));
+      //  }
+    }
+
+    protected function pos(){
+        if(Request::ajax()){
+            $proid = $_POST['proid'];
+            $cityob = Citys::where('province_id','=',$proid) ->take(10)->get();
+
+            $cityar = array();
+            $i=0;
+            foreach($cityob as $citob){
+                $cityar[$i]['city_id'] = $citob->city_id;
+                $cityar[$i]['city_name'] = $citob->city_name;
+                $i++;
+            }
+            echo json_encode($cityar);
+        }
     }
 
     protected function edit(){
