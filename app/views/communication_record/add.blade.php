@@ -62,13 +62,23 @@
                     <tr>
                         <th>其他信息</th>
                         <td></td>
-                        <td>客户来源：<input id="reason" name="reason" ></td>
-                        <td>合作状态：<select id="rbs"  name="rbs">
+                        <td>客户来源：
+                            <select id="reason"  name="reason">
+
+
+                                @foreach($rear as $rears)
+                                    <option value="{{ $rears['type'] }}">{{ $rears['type'] }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>合作状态：
+                        	<select id="rbs"  name="rbs">
 
                                 @foreach($sty as $st)
-                                    <option value="{{ $st['id'] }}">{{ $st['type'] }}</option>
+                                    <option value="{{ $st['type'] }}">{{ $st['type'] }}</option>
                                 @endforeach
-                            </select></td>
+                            </select>
+                        </td>
                         <td>备注：<input id="remarks" name="remarks"></td>
                     </tr>
 

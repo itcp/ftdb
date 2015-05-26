@@ -62,14 +62,19 @@ Route::group(array('namespace'=>'Setup'),function(){
 
 //  会议活动组
 Route::group(array('namespace'=>'Meeting'),function(){
-
+    Route::get('mee/add','MeetingSetupController@addView');    //  加载添加页面视图
+    Route::get('mee/edit','MeetingSetupController@edit');   // 编辑修改
+    Route::post('meepro','MeetingSetupController@pos');
+    Route::post('meeadd','MeetingSetupController@add');        //  post添加处理
 });
 
 //  客户通讯录组
 Route::group(array('namespace'=>'CommunicationRecord'),function(){
-    Route::get('cus/add','CommunicationController@addView');
+    Route::get('cus/add','CommunicationController@addView');    //  加载添加页面视图
+    Route::get('cus/edit','CommunicationController@editView');   // 编辑修改
     Route::post('cuspro','CommunicationController@pos');
-    Route::post('cusadd','CommunicationController@add');
+    Route::post('cusadd','CommunicationController@add');        //  post添加处理
+    Route::get('cus/edjson','CommunicationController@edjson');
 });
 
 //  客户跟进组

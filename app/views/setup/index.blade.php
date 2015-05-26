@@ -64,8 +64,7 @@
         <div class="row r_but">
 
             <button id="sAdd">添加</button>
-            <button id="sModify">修改</button>
-            <button id="sDelete">删除</button>
+
         </div>
     </div>
 

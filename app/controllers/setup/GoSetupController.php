@@ -8,23 +8,6 @@ namespace Setup;
  */
 use BaseController, Form, Input, Redirect, Sentry, View,Request,Auth,Reason,DB,Config,TypeRecord,SetType;
 class GoSetupController extends \BaseController{
-    //  跟进情况记录类型
-    public $ustomer_type = '';
-    //  缘由、接触渠道
-    public $reason='';
-
-    //  合作状态
-    public $rb_state = '';
-    //  服务分类
-    public $service_type = '';
-
-    //  会议活动类型
-    public $meeting_type = '';
-    //  身份类型
-    public $identity = '';
-    //  活动状态
-    public $act_state = '';
-
 
     //  视图加载
     protected function typeView(){

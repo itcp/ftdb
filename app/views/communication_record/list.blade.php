@@ -49,6 +49,7 @@
                             <th>增加时间</th>
                             <th>编辑人</th>
                             <th>备注</th>
+                            <th></th>
                         @for($i=0;$i<count($custs);$i++)
                             <tr>
                                 <td>
@@ -72,6 +73,7 @@
                                 <td>{{ $custs[$i]['release_time'] }}</td>
                                 <td>{{ $custs[$i]['editor'] }}</td>
                                 <td>{{ $custs[$i]['remarks'] }}</td>
+                                <td><a href="/cus/edit?id={{ $custs[$i]['id'] }}">编辑</a></td>
                             </tr>
                             @endfor
 

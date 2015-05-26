@@ -9,9 +9,11 @@ $(document).ready(function(){
         var typeid = ar[1];
 
     var ta = document.getElementById('add_dta');
-    ta.style.visibility='hidden';
-    function tafun(){
 
+        ta.style.visibility='hidden';
+
+    function tafun(){
+        taft = true;
         ta.style.visibility='visible';
 
     }
@@ -28,7 +30,10 @@ $(document).ready(function(){
                 meun:typeid
             },
             function(data,status){
+                $("#addInput").val("");
                 alert(data);
+                location.reload();
+
             });
     }
     document.getElementById('addType').addEventListener('click',addin);

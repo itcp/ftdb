@@ -86,12 +86,18 @@ class CommunicationController extends \BaseController{
     }
     //  添加页面视图组装
     protected function addView(){
-        $cust = SetType::where('type_name', '=','合作状态')->take(10)->get();
-      //  $cus=array();
-        $stid='';
-        foreach($cust as $cuso) {
-            $stid = $cuso->id;
+
+        $reid = 5;  //  客户来源ID
+        $reas = TypeRecord::where('setup_id','=',$reid)->take(10)->get();
+        $rear = array();
+        $ir =0;
+        foreach($reas as $reass){
+            $rear[$ir]['id'] = $reass->id;
+            $rear[$ir]['type'] = $reass->type;
+            $ir++;
         }
+
+        $stid = 7;  // 合作状态ID
         $stype = TypeRecord::where('setup_id','=',$stid)->take(10)->get();
 
        $trec = array();
@@ -102,7 +108,7 @@ class CommunicationController extends \BaseController{
             $trec[$i]['type'] = $styer->type;
             $i++;
         }
-
+        //  省份数据组装
         $pros = Provinces::all();
         $proar = array();
         $i = 0;
@@ -112,21 +118,21 @@ class CommunicationController extends \BaseController{
             $i++;
         }
 
-        return View::make('communication_record.add')->with(array('sty'=>$trec,'province'=>$proar));
+        return View::make('communication_record.add')->with(array('sty'=>$trec,'province'=>$proar,'rear'=>$rear));
     }
 
     protected function add(){
-       // if(Request::ajax()){
+        if(Request::ajax()){
             $name = Auth::user()->name;
 
             $couadd = Customers::create(array('company' => $_POST['company'],'contact'=>$_POST['contact'],'position'=> $_POST['position'],'sex'=> $_POST['sex'],'telephone'=> $_POST['telephone'],'phone'=> $_POST['phone'],'email'=> $_POST['email'],'relationship_between_state'=> $_POST['rbs'],'province'=> $_POST['province'],'city'=> $_POST['city'],'address'=> $_POST['address'],'reason'=> $_POST['reason'],'remarks'=>$_POST['remarks'],'editor'=>$name));
-            if(1==true){
-                echo $_POST;
+            if($couadd==true){
+                echo 1;
             }else{
                 echo 2;
             }
 
-      //  }
+        }
     }
 
     protected function pos(){
@@ -144,6 +150,53 @@ class CommunicationController extends \BaseController{
             echo json_encode($cityar);
         }
     }
+    protected function editView(){
+        $cusid = $_GET['id'];
+        $cus = Customers::find($cusid);
+
+        $reid = 5;  //  客户来源ID
+        $reas = TypeRecord::where('setup_id','=',$reid)->take(10)->get();
+        $rear = array();
+        $ir =0;
+        foreach($reas as $reass){
+            $rear[$ir]['id'] = $reass->id;
+            $rear[$ir]['type'] = $reass->type;
+            $ir++;
+        }
+
+        $stid = 7;  // 合作状态ID
+        $stype = TypeRecord::where('setup_id','=',$stid)->take(10)->get();
+
+        $trec = array();
+        $i=0;
+        foreach($stype as $styer){
+
+            $trec[$i]['id'] = $styer->id;
+            $trec[$i]['type'] = $styer->type;
+            $i++;
+        }
+        //  省份数据组装
+        $pros = Provinces::all();
+        $proar = array();
+        $i = 0;
+        foreach($pros as $prory){
+            $proar[$i]['id'] = $prory->province_id;
+            $proar[$i]['pname'] = $prory->province_name;
+            $i++;
+        }
+
+        return View::make('communication_record.edit')->with(array('sty'=>$trec,'province'=>$proar,'rear'=>$rear,'cus'=>$cus));
+    }
+
+    protected function edjson(){
+        if(Request::ajax()) {
+            $cusid = $_POST['id'];
+            $cus = Customers::find($cusid);
+
+            echo json_encode($cus);
+        }
+    }
+
 
     protected function edit(){
         $type = $_POST['type'];
