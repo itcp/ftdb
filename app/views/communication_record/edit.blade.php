@@ -19,12 +19,12 @@
 
             <h3></h3>
         </div>
-        <div class="panel panel-default row mar_b">
+        <div class="panel panel-default row mar_b" style="width:700px;">
             <div class="panel-heading">
                 <h2 class="panel-title">我的资料</h2>
 
             </div>
-            <form action="userup"  method="post">
+            <form>
                 <table class="table">
                     <tr>
                         <th></th>
@@ -34,14 +34,14 @@
                     <tr id="company">
                         <th style="width:100px;">公司名称：</th>
                         <td>{{ $cus['company'] }}</td>
-                        <td><input name="username" ></td>
+                        <td><input name="company" ></td>
                     </tr>
-                    <tr>
+                    <tr id="contact">
                         <th>姓名：</th>
-                        <td>{{ $cus['name'] }}</td>
-                        <td><input name="name" ></td>
+                        <td>{{ $cus['contact'] }}</td>
+                        <td><input name="contact" ></td>
                     </tr>
-                    <tr>
+                    <tr id="sex">
                         <th>性别：</th>
                         <td>{{ $cus['sex'] }}</td>
                         <td>
@@ -51,27 +51,27 @@
                             </select>
                         </td>
                     </tr>
-                    <tr>
-                        <th>职位：</th>
+                    <tr id="position">
+                        <th >职位：</th>
+                        <td>{{ $cus['position'] }}</td>
+                        <td><input name="position"  ></td>
+                    </tr>
+                    <tr id="telephone">
+                        <th >电话：</th>
                         <td>{{ $cus['telephone'] }}</td>
                         <td><input name="telephone"  ></td>
                     </tr>
-                    <tr>
-                        <th>电话：</th>
-                        <td>{{ $cus['telephone'] }}</td>
-                        <td><input name="telephone"  ></td>
-                    </tr>
-                    <tr>
-                        <th>手机：</th>
+                    <tr id="phone">
+                        <th >手机：</th>
                         <td>{{ $cus['phone'] }}</td>
                         <td><input name="phone" ></td>
                     </tr>
-                    <tr>
+                    <tr id="email">
                         <th>Email：</th>
                         <td>{{ $cus['email'] }}</td>
                         <td><input name="email" ></td>
                     </tr>
-                    <tr>
+                    <tr id="address">
                         <th>地址：</th>
                         <td>{{ $cus['address'] }}</td>
                         <td>
@@ -83,17 +83,17 @@
                             <select id="city"  name="city">
 
                             </select>
-                            <input id="address" name="address" style="width:300px;">
+                            <input  name="address" style="width:300px;">
                         </td>
                     </tr>
-                    <tr>
+                    <tr id="reason">
                         <th>客户来源：</th>
                         <td>{{ $cus['reason'] }}</td>
                         <td>不可修改</td>
                     </tr>
-                    <tr>
+                    <tr id="rbs">
                         <th>合作状态：</th>
-                        <td>{{ $cus['rbs'] }}</td>
+                        <td>{{ $cus['relationship_between_state'] }}</td>
                         <td>
                             <select id="rbs"  name="rbs">
 
@@ -103,19 +103,20 @@
                             </select>
                         </td>
                     </tr>
-                    <tr>
+                    <tr id="remarks">
                         <th>备注：</th>
                         <td>{{ $cus['remarks'] }}</td>
                         <td><input name="remarks" ></td>
                     </tr>
                 </table>
-                <input type="hidden" name="id" value="{{ $cus['id'] }}" />
-                <button  class="btn btn-success btn-xs addType">编辑</button>
+                <input type="hidden" id="id" name="id" value="{{ $cus['id'] }}" />
+                <button id="cused"  class="btn btn-success btn-xs addType">编辑</button>
             </form>
         </div>
 
 
     </div>
+    <script src="{{ asset('scripts/cus/comre.js') }}" ></script>
     <script src="{{ asset('scripts/cus/poed.js') }}" ></script>
 
     @include('_support.foot_js')

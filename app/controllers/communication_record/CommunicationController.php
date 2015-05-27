@@ -9,7 +9,7 @@ namespace CommunicationRecord;
 use BaseController, Form, Input, Redirect, Sentry, View,User,Auth,Customers,SetType,TypeRecord,Provinces,Citys,Request;
 // 客户通讯录
 class CommunicationController extends \BaseController{
-
+//  通讯录的列表页面数据组装
     public function home(){
         $i_us = Auth::user()->identity;
         if($i_us == 1){
@@ -17,7 +17,7 @@ class CommunicationController extends \BaseController{
 
             $custs = array();
             $i = 0;
-            foreach ($cust as $cus) {
+            foreach ($cust as $cus){
                 $custs[$i]['id'] = $cus->id;
                 $custs[$i]['company'] = $cus->company;
                 $custs[$i]['contact'] = $cus->contact;
@@ -120,12 +120,26 @@ class CommunicationController extends \BaseController{
 
         return View::make('communication_record.add')->with(array('sty'=>$trec,'province'=>$proar,'rear'=>$rear));
     }
-
+//  添加功能
     protected function add(){
         if(Request::ajax()){
+
             $name = Auth::user()->name;
 
-            $couadd = Customers::create(array('company' => $_POST['company'],'contact'=>$_POST['contact'],'position'=> $_POST['position'],'sex'=> $_POST['sex'],'telephone'=> $_POST['telephone'],'phone'=> $_POST['phone'],'email'=> $_POST['email'],'relationship_between_state'=> $_POST['rbs'],'province'=> $_POST['province'],'city'=> $_POST['city'],'address'=> $_POST['address'],'reason'=> $_POST['reason'],'remarks'=>$_POST['remarks'],'editor'=>$name));
+            $proob = Provinces::where('province_id','=',$_POST['province']) ->take(10)->get();
+            $prona = '';
+            foreach($proob as $proobr){
+                $prona = $proobr->province_name;
+            }
+
+            $citob = Citys::where('city_id','=',$_POST['city']) ->take(10)->get();
+            $citna = '';
+            foreach($citob as $citobr){
+                $citna = $citobr->city_name;
+            }
+
+            $address =$prona.$citna.$_POST['address'];
+            $couadd = Customers::create(array('company' => $_POST['company'],'contact'=>$_POST['contact'],'position'=> $_POST['position'],'sex'=> $_POST['sex'],'telephone'=> $_POST['telephone'],'phone'=> $_POST['phone'],'email'=> $_POST['email'],'relationship_between_state'=> $_POST['rbs'],'province'=> $_POST['province'],'city'=> $_POST['city'],'address'=> $address,'reason'=> $_POST['reason'],'editor'=>$name,'remarks'=>$_POST['remarks']));
             if($couadd==true){
                 echo 1;
             }else{
@@ -134,7 +148,7 @@ class CommunicationController extends \BaseController{
 
         }
     }
-
+//  二组联动菜单的数据组装
     protected function pos(){
         if(Request::ajax()){
             $proid = $_POST['proid'];
@@ -150,6 +164,7 @@ class CommunicationController extends \BaseController{
             echo json_encode($cityar);
         }
     }
+    //  编辑修改页面的视图组装
     protected function editView(){
         $cusid = $_GET['id'];
         $cus = Customers::find($cusid);
@@ -197,18 +212,53 @@ class CommunicationController extends \BaseController{
         }
     }
 
-
+// 编辑修改功能
     protected function edit(){
-        $type = $_POST['type'];
-        $id = $_POST['id'];
-        $meun = $_POST['meun'];
+        if(Request::ajax()) {
+           // echo $_POST['company'].'d';
+            $name = Auth::user()->name;
+            $id = $_POST['id'];
 
-        $tr = TypeRecord::find($id);
-        $tr->type = $type;
-        if($tr->save()){
-            return Redirect::to('setup?meun='.$meun.'');
-        }else{
-            return '修改不成功！';
+            $tr = Customers::find($id);
+            $proob = Provinces::where('province_id','=',$_POST['province']) ->take(10)->get();
+            $prona = '';
+            foreach($proob as $proobr){
+                $prona = $proobr->province_name;
+            }
+
+            $citob = Citys::where('city_id','=',$_POST['city']) ->take(10)->get();
+            $citna = '';
+            foreach($citob as $citobr){
+                $citna = $citobr->city_name;
+            }
+
+            $address =$prona.$citna.$_POST['address'];
+
+            $tr->company = $_POST['company'];
+            $tr->contact = $_POST['contact'];
+            $tr->sex = $_POST['sex'];
+            $tr->position = $_POST['position'];
+            $tr->telephone = $_POST['telephone'];
+            $tr->phone = $_POST['phone'];
+            $tr->email = $_POST['email'];
+            $tr->province = $_POST['province'];
+            $tr->city = $_POST['city'];
+            $tr->address = $address;
+            $tr->relationship_between_state = $_POST['rbs'];
+            $tr->remarks = $_POST['remarks'];
+            $tr->editor = $name;
+
+            $hz=array();
+            if ($tr->save()) {
+
+                $hz['add']=$address;
+                $hz['ft']=1;
+                //return Redirect::to('setup?meun='.$meun.'');
+                return $hz;
+            } else {
+                $hz['ft']=2;
+                return $hz;
+            }
         }
     }
 }

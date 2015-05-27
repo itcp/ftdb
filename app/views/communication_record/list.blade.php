@@ -32,7 +32,7 @@
             </div>
             <div class="panel panel-default row mar_b">
                         <div class="panel-heading">
-                            <h2 class="panel-title">客户信息列表 {{ 1 }}</h2>
+                            <h2 class="panel-title">客户信息列表</h2>
 
                         </div>
                         <table class="table">

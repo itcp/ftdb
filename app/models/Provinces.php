@@ -5,5 +5,5 @@ class Provinces extends \Eloquent {
 
     public $timestamps = false;
 
-	protected $fillable = ['province_id','province_name'];
+	protected $fillable = ['province_id','province_name','date_created','date_updated'];
 }

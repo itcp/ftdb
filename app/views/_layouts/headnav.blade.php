@@ -15,7 +15,7 @@
                     <li><a style="color:#1C86EE;" href="/setup?meun=5">客户来源</a></li>
                     <li><a style="color:#1C86EE;" href="/setup?meun=6">活动状态</a></li>
                     <li><a style="color:#1C86EE;" href="/setup?meun=7">合作状态</a></li>
-
+                    <li><a style="color:#1C86EE;" href="/setup?meun=8">项目来源</a></li>
                 </ul>
             </li>
         </ul>
