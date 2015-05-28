@@ -2,7 +2,8 @@
 <html class="no-js" ng-app>
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <Link Rel="SHORTCUT ICON" href="http://localhost:8000/logo.ico">
+    <title>凤腾数据库</title>
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +30,13 @@
                     <tr>
                         <th>基本信息</th>
                         <td >活动名称：<input id="company" name="company"> </td>
-                        <td>活动类型：<input id="contact" name="contact" ></td>
+                        <td>活动类型：
+                            <select name="mety">
+                                @foreach($metyar as $ar)
+                                    <option value="{{ $ar['id'] }}">{{ $ar['pname'] }}</option>
+                                @endforeach
+                            </select>
+                        </td>
 
                         <td>举办公司：<input id="position" name="position"> </td>
                         <td>项目来源：
@@ -37,10 +44,7 @@
                                 <option value="线上">线上</option>
                                 <option value="线下">线下</option>
                             </select>
-                            <select id=""  name="source_type">
-                                <option value="男">男</option>
 
-                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -49,9 +53,13 @@
                         <td>活动负责人：<input id="phone" name="phone"></td>
                         <td>
                             举办地点：
+                            <select name="prft">
+                                <option value="广东省">省内</option>
+                                <option value="外省">外省</option>
+                            </select>
                             <select id="province"  name="province" >
 
-                                @foreach($province as $pr)
+                                @foreach($proar as $pr)
                                     <option value="{{ $pr['id'] }}">{{ $pr['pname'] }}</option>
                                 @endforeach
                             </select>
@@ -67,39 +75,23 @@
 
                     </tr>
                     <tr>
-                        <th>其他事项</th>
-                        <td colspan="4"><select id="province"  name="province" >
-
-                                @foreach($province as $pr)
-                                    <option value="{{ $pr['id'] }}">{{ $pr['pname'] }}</option>
-                                @endforeach
-                            </select>
-                            <select id="city"  name="city">
-
-                            </select>
-                            <input id="address" name="address" style="width:300px;">
-                        </td>
+                        <th>服务需求：</th>
+                        <td colspan="4">fjAJFASJF<br />fafaf<br />fafaf<br />s</td>
                     </tr>
                     <tr>
                         <th>其他信息</th>
-                        <td></td>
-                        <td>客户来源：
-                            <select id="reason"  name="reason">
-
-
-                                @foreach($rear as $rears)
-                                    <option value="{{ $rears['type'] }}">{{ $rears['type'] }}</option>
-                                @endforeach
-                            </select>
+                        <td>活动规模：
+                            <input id="" name="scale">
                         </td>
-                        <td>合作状态：
-                            <select id="rbs"  name="rbs">
+                        <td>活动状态：
+                            <select id="mestar"  name="mestar">
 
-                                @foreach($sty as $st)
+                                @foreach($mestar as $st)
                                     <option value="{{ $st['type'] }}">{{ $st['type'] }}</option>
                                 @endforeach
                             </select>
                         </td>
+                        <td>举办周期：<input id="remarks" name="cycle"></td>
                         <td>备注：<input id="remarks" name="remarks"></td>
                     </tr>
 

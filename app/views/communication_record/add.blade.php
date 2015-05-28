@@ -47,7 +47,8 @@
                     </tr>
                     <tr>
                         <th>地址：</th>
-                        <td colspan="4"><select id="province"  name="province" >
+                        <td colspan="4">
+                        	<select id="province"  name="province" >
 
                                 @foreach($province as $pr)
                                     <option value="{{ $pr['id'] }}">{{ $pr['pname'] }}</option>
