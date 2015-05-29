@@ -18,7 +18,7 @@
 
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
-<script src="{{ asset('scripts/jquery/dist/jquery.js') }}"></script>
+
 <script src="{{ asset('scripts/angular/angular.js') }}"></script>
 <script src="{{ asset('scripts/json3/lib/json3.js') }}"></script>
 
