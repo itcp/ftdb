@@ -49,41 +49,50 @@
 
                     <tr>
                         <th>基本信息</th>
-                        <td >活动名称：<input id="company" name="company"></td>
+                        <td >活动名称：<input id="activity_name" name="activity_name"></td>
 
 
-                        <td>举办公司：<input id="position" name="position"></td>
+                        <td>举办公司：<input id="company" name="company"></td>
                        <td>活动类型：
-                            <select name="mety">
+                            <select name="mety" id="meetype">
                                 @foreach($metyar as $ar)
                                     <option value="{{ $ar['id'] }}">{{ $ar['pname'] }}</option>
                                 @endforeach
                             </select>
+                        </td>
+                        <td>
+
                        项目来源：
-                            <select id=""  name="channels">
+                            <select id="channels"  name="channels">
                                 <option value="线上">线上</option>
                                 <option value="线下">线下</option>
                             </select>
-
+                           <select id="source_type" name="source_type">
+                               @foreach($optyar as $opty)
+                                   <option value="{{ $opty['type'] }}">{{ $opty['type'] }}</option>
+                               @endforeach
+                           </select>
 
                         </td>
                     </tr>
                     <tr class="jhep">
                         <th>计划安排</th>
-                        <td colspan="3">
+                        <td colspan="4">
 
                             <li>
-                            客户经理：<input id="telephone" name="telephone">活动负责人：<input id="phone" name="phone">
+                            客户经理：<input id="customer" name="customer">
+                                活动负责人：<input id="activity_head" name="activity_head">
                             </li>
                                 <li>
                                     举办时间:
                                     <input id="stime" name="start_time" class="time" type="text"> - <input id="ftime" name="finish_time" class="time" type="text">
                                 </li>
                             <li>举办地点：
-                            <select name="prft">
+                            <select name="prft" id="thepr">
                                 <option value="广东省">省内</option>
                                 <option value="外省">外省</option>
                             </select>
+
                             <select id="province"  name="province" >
 
                                 @foreach($proar as $pr)
@@ -101,28 +110,33 @@
 
                     </tr>
                     <tr>
-                        <th>服务需求：</th>
-                        <td colspan="4">fjAJFASJF<br />fafaf<br />fafaf<br />s</td>
+                        <th>服务需求</th>
+                        <td colspan="4" id="xpli">
+                            @foreach($xpar as $xp)
+                                <div ><input type="checkbox" value="{{ $xp['id'] }}" />{{ $xp['type'] }}<spen></spen></div>
+                            @endforeach
+                        </td>
                     </tr>
+
                     <tr>
                         <th>其他信息</th>
                         <td>活动规模：
-                            <input id="" name="scale">
+                            <input id="scale" name="scale">
                         </td>
                         <td>活动状态：
-                            <select id="mestar"  name="mestar">
+                            <select id="me_star"  name="me_star">
 
                                 @foreach($mestar as $st)
                                     <option value="{{ $st['type'] }}">{{ $st['type'] }}</option>
                                 @endforeach
                             </select>
                         </td>
-                        <td>举办周期：<input id="remarks" name="cycle"></td>
-
+                        <td>举办周期：<input id="cycle" name="cycle"></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>备注：</th>
-                        <td colspan="3"><input id="remarks" name="remarks"></td>
+                        <td colspan="4"><input id="remarks" name="remarks"></td>
                     </tr>
                 </table>
 
@@ -137,7 +151,7 @@
 
 
 <script src="{{ asset('scripts/cus/comre.js') }}"></script>
-<script src="{{ asset('scripts/cus/add.js') }}"></script>
+<script src="{{ asset('scripts/meeting/meeadd.js') }}"></script>
 
 
 </body>

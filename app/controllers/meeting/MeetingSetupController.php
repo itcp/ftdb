@@ -76,6 +76,16 @@ class MeetingSetupController extends \BaseController{
             $ir++;
         }
 
+        $xpid = 2;
+        $xpstob = TypeRecord::where('setup_id','=',$xpid)->take(10)->get();
+        $xpar = array();
+        $ir =0;
+        foreach($xpstob as $xpstobr){
+            $xpar[$ir]['id'] = $xpstobr->id;
+            $xpar[$ir]['type'] = $xpstobr->type;
+            $ir++;
+        }
+
         $reid = 6;  //  会议活动状态来源ID
         $mestob = TypeRecord::where('setup_id','=',$reid)->take(10)->get();
         $mear = array();
@@ -85,7 +95,7 @@ class MeetingSetupController extends \BaseController{
             $mear[$ir]['type'] = $mestobr->type;
             $ir++;
         }
-        return View::make('meeting.add')->with(array('optyar'=>$optyar,'proar'=>$proar,'mestar'=>$mear,'metyar'=>$metyar));
+        return View::make('meeting.add')->with(array('optyar'=>$optyar,'proar'=>$proar,'mestar'=>$mear,'metyar'=>$metyar,'xpar'=>$xpar));
     }
     //
     protected function add(){

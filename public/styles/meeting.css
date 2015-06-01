@@ -1,3 +1,8 @@
 .time { width:120px;}
 
 .jhep li{ margin:10px 0px;}
+
+#xpli div {width:500px; height:26px; margin:10px 0; float:left;}
+#remarks {width:600px;}
+th {width:80px;}
+li { list-style-type: none;}
