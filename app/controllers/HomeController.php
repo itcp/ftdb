@@ -19,5 +19,45 @@ class HomeController extends BaseController {
 	{
 		return View::make('hello');
 	}
+    //  城市列表的获取： 1、以省级id获得城市名返回
+    protected function proIdcity(){
+        if(Request::ajax()){
+            $proid = $_POST['proid'];
+            $cityob = Citys::where('province_id','=',$proid) ->take(10)->get();
+
+            $cityar = array();
+            $i=0;
+            foreach($cityob as $citob){
+                $cityar[$i]['city_id'] = $citob->city_id;
+                $cityar[$i]['city_name'] = $citob->city_name;
+                $i++;
+            }
+            echo json_encode($cityar);
+        }
+    }
+
+    //  城市列表的获取： 1、以省级 name 获得城市名返回
+    protected function proNamecity(){
+        if(Request::ajax()){
+            $proid = $_POST['proname'];
+            $pro = Provinces::where('province_name','=',$proid)->take(10)->get();
+
+            foreach($pro as $pror){
+                $proid=$pror->province_id;
+            }
+
+            $cityob = Citys::where('province_id','=',$proid) ->take(10)->get();
+
+            $cityar = array();
+            $i=0;
+            foreach($cityob as $citob){
+                $cityar[$i]['city_id'] = $citob->city_id;
+                $cityar[$i]['city_name'] = $citob->city_name;
+                $i++;
+            }
+            echo json_encode($cityar);
+        }
+    }
+
 
 }

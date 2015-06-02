@@ -93,7 +93,7 @@
     </div>
 
 </div>
-<script src="{{ asset('scripts/cus/comre.js') }}"></script>
+<script src="{{ asset('scripts/city.js') }}"></script>
 <script src="{{ asset('scripts/cus/add.js') }}"></script>
 @include('_support.foot_js')
 

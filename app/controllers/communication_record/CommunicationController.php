@@ -148,22 +148,7 @@ class CommunicationController extends \BaseController{
 
         }
     }
-//  二组联动菜单的数据组装
-    protected function pos(){
-        if(Request::ajax()){
-            $proid = $_POST['proid'];
-            $cityob = Citys::where('province_id','=',$proid) ->take(10)->get();
 
-            $cityar = array();
-            $i=0;
-            foreach($cityob as $citob){
-                $cityar[$i]['city_id'] = $citob->city_id;
-                $cityar[$i]['city_name'] = $citob->city_name;
-                $i++;
-            }
-            echo json_encode($cityar);
-        }
-    }
     //  编辑修改页面的视图组装
     protected function editView(){
         $cusid = $_GET['id'];
@@ -261,4 +246,6 @@ class CommunicationController extends \BaseController{
             }
         }
     }
+
+
 }

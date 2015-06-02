@@ -1,23 +1,8 @@
 $(document).ready(function(){
-    //  为勾选服务需求后添加文本框
-    $("#xpli div input:checkbox").prop("checked", false);
-    $("#xpli div input:checkbox").click(function(){
-        var tph=$(this).parent().html();
-        if($(this).is(':checked')){
-
-            var txt=$(this).parent().text();
-            $(this).next("spen").html('<input type="text" style="width:400px;" />');
-
-        }else{
-
-            $(this).next("spen").html('');
-        }
-
-    });
 
     $("#butadd").click(function(){
 
-        var act_naem = $("#activity_name").val();
+        var act_name = $("#activity_name").val();
         var company = $("#company").val();
         var meetype = $("#meetype").val();
         var channels = $("#channels").val();
@@ -38,41 +23,63 @@ $(document).ready(function(){
         var xpli =document.getElementById('xpli').getElementsByTagName('div');
         var anu = xpli.length;
         for(var num= 0;num<anu;num++){
+
             if(xpli[num].getElementsByTagName('input')[0].checked){
 
-                var ssl = xpli[num].getElementsByTagName('input')[0].value;
-                var sss = xpli[num].textContent;
-                var ssv = xpli[num].getElementsByTagName('spen')[0].getElementsByTagName('input')[0].value;
+                    var ssl = xpli[num].getElementsByTagName('input')[0].value;
+                    var sss = xpli[num].textContent;
+                    var ssv = xpli[num].getElementsByTagName('spen')[0].getElementsByTagName('input')[0].value;
 
-                ar[num]=[ssl, sss, ssv];
+                    ar[num] = [ssl, sss, ssv];
             }
         }
+
+        // 由于 ar 这个数组的元素长度也是取 anu 最大限度循环得来的，当客户需求并不需要所有服务的时候，ar 中的成员就会有空值undefined，接下来这个for循环函数就是过滤掉空值的数组成员
+        for(var i = num;i>=0;i--){
+            if(ar[i]===undefined){
+                ar.splice(i,1);
+            }
+        }
+
         var xpli = JSON.stringify(ar);
 
-        var scals = $("#scals").val();
+        var scale = $("#scale").val();
         var me_star = $("#me_star").val();
         var cycle = $("#cycle").val();
         var remarks = $("#remarks").val();
 
-        
-        vardump(xpli);
-        exit;
-
-        $.post("/meeadd",
+        $.post("/mee/poadd",
             {
-                company:company_v,
+                act_name:act_name,
+                company:company,
+                meetype:meetype,
+                channels:channels,
+                source_ty:source_ty,
 
-                remarks:remarks_v
+                customer:customer,
+                act_head:act_head,
+                stime:stime,
+                ftime:ftime,
+                thepr:thepr,
+                province:province,
+                city:city,
+                address:address,
 
+                xpli:xpli,
+
+                scale:scale,
+                me_star:me_star,
+                cycle:cycle,
+                remarks:remarks
             },
 
             function(data,status){
-
-                if(data == 1){
+                alert(data);
+                /*if(data == 1){
                     alert( "成功");
                 }else if(data == 2){
                     alert("未能添加通讯中，请重新提交！");
-                }
+                }*/
 
             });
 

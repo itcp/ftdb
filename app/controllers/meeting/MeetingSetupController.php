@@ -6,7 +6,7 @@ namespace Meeting;
  * Date: 2015/5/26
  * Time: 11:34
  */
-use BaseController, Form, Input, Redirect, Sentry, View,User,Auth,Customers,SetType,TypeRecord,Provinces,Citys,Request,Meeting;
+use BaseController, Form, Input, Redirect, Sentry, View,User,Auth,Customers,SetType,TypeRecord,Provinces,Citys,Request,Meeting,ServiceDescription;
 class MeetingSetupController extends \BaseController{
     //
     protected function meetingList(){
@@ -99,6 +99,52 @@ class MeetingSetupController extends \BaseController{
     }
     //
     protected function add(){
+        if(Request::ajax()){
+            $editor = Auth::user()->name;
+            //  Meeting 为会议活动详情表模型
+            //  ServiceDescriptior 为服务需求记录表模型
+
+            $acttf= Meeting::where('activity_name','=',Input::get('act_name'))->take(10)->get();
+            $actn = '';
+            foreach($acttf as $acttfr){
+                $actn=$acttfr->activity_name;
+            }
+            if($actn==$_POST['act_name']){
+                echo "此会议同名记录已有，请确认后填写！";
+                exit;
+            }
+
+            $place=$_POST['province'].$_POST['city'].$_POST['address'];
+
+            $meein = Meeting::create(array('activity_name'=>Input::get('act_name'),'meeting_type'=>
+            $_POST['meetype'],'channels'=>$_POST['channels'],'source_type'=>$_POST['source_ty']
+            ,'customer'=>$_POST['company'],'salesman'=>$_POST['customer'],'activity_head'=>$_POST['act_head'],
+                'the_province'=>$_POST['thepr'],'place'=>$place,'activity_start_time'
+            =>$_POST['stime'],'activity_finish_time'=>$_POST['ftime'],'scale'=>$_POST['scale'],
+                'meetings_cycle'=>$_POST['cycle'],'the_active_state'=>$_POST['me_star'],'editor'
+            =>$editor,'remarks'=>$_POST['remarks']));
+            $meeid='';
+            if($meein){
+                $actnt=Input::get('act_name');
+                $mear = Meeting::where('activity_name','=',$actnt)->take(10)->get();
+                foreach($mear as $meart){
+                    $meeid=$meart->id;
+                }
+            }
+
+            $xpar = json_decode(Input::get('xpli'));
+            $xpco = count($xpar);
+            for($i=0;$i<$xpco;$i++){
+                $serin = ServiceDescription::create(array('meeting_id'=>$meeid,'service_id'=>$xpar[$i][0],'service_name'=>$xpar[$i][1],'conent'=>$xpar[$i][2]));
+
+                if(serin==false){
+                    echo "保存服务要求记录失败！";
+                    exit;
+                }
+            }
+            echo 1;
+
+        }
 
     }
 

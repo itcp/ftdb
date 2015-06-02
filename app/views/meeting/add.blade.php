@@ -49,14 +49,14 @@
 
                     <tr>
                         <th>基本信息</th>
-                        <td >活动名称：<input id="activity_name" name="activity_name"></td>
+                        <td >活动名称：<input id="activity_name" name="activity_name" value="请将填写的会议加上届数" onfocus="if (value =='请将填写的会议加上届数'){value =''}"></td>
 
 
                         <td>举办公司：<input id="company" name="company"></td>
                        <td>活动类型：
                             <select name="mety" id="meetype">
                                 @foreach($metyar as $ar)
-                                    <option value="{{ $ar['id'] }}">{{ $ar['pname'] }}</option>
+                                    <option value="{{ $ar['pname'] }}">{{ $ar['pname'] }}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -96,7 +96,7 @@
                             <select id="province"  name="province" >
 
                                 @foreach($proar as $pr)
-                                    <option value="{{ $pr['id'] }}">{{ $pr['pname'] }}</option>
+                                    <option value="{{ $pr['pname'] }}">{{ $pr['pname'] }}</option>
                                 @endforeach
                             </select>
                             <select id="city"  name="city">
@@ -150,9 +150,10 @@
 </div>
 
 
-<script src="{{ asset('scripts/cus/comre.js') }}"></script>
+<script src="{{ asset('scripts/city2.js') }}"></script>
+<script src="{{ asset('scripts/meeting/meeinptx.js') }}"></script>
 <script src="{{ asset('scripts/meeting/meeadd.js') }}"></script>
-
+@include('_support.foot_js')
 
 </body>
 </html>

@@ -11,6 +11,7 @@
 |
 */
 //  先判断用户是否登录，如已登录-重定向跳转到管理后台的首页，没有登录则重定向跳转到登录页
+Route::get('hello','HomeController@showWelcome');
 
 Route::get('/', function()
 {
@@ -41,6 +42,12 @@ Route::group(array('namespace'=>'CommunicationRecord'),function(){
 
 
 });
+//  有要调用地区二级菜单时返回城市列表
+Route::post('city','HomeController@proIdcity');
+Route::post('cityn','HomeController@proNamecity');
+
+
+
 //  管理员栏目组
 Route::group(array('namespace'=>'Dbadmin'),function(){
 
@@ -67,18 +74,21 @@ Route::group(array('namespace'=>'Meeting'),function(){
     Route::get('mee/edit','MeetingSetupController@editView');    //  加载添加页面视图
 
     Route::post('meepro','MeetingSetupController@pos');
-    Route::post('mee/add','MeetingSetupController@add');        //  post添加处理
+    Route::post('mee/poadd','MeetingSetupController@add');        //  post添加处理
     Route::post('mee/edit','MeetingSetupController@edit');   // 编辑修改
 });
 
-//  客户通讯录组
+//  客户通讯录组 for security reasons,framing is not allowed
 Route::group(array('namespace'=>'CommunicationRecord'),function(){
     Route::get('cus/add','CommunicationController@addView');    //  加载添加页面视图
     Route::get('cus/edit','CommunicationController@editView');   // 编辑修改
-    Route::post('cuspro','CommunicationController@pos');
+
     Route::post('cusadd','CommunicationController@add');        //  post添加处理
     Route::get('cus/edjson','CommunicationController@edjson');
     Route::post('cus/poed','CommunicationController@edit');
+
+    //Route::post('city','CommunicationController@proIdcity');
+   // Route::post('city2','CommunicationController@proNamecity');
 });
 
 //  客户跟进组
