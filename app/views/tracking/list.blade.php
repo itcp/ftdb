@@ -17,7 +17,7 @@
     <div class="container m_left">
         <div class="row mar_b">
 
-            <a href="mee/add" class="wu">添加会议活动</a>
+            <a href="mee/add" class="wu">添加跟进记录</a>
             <div class="mm_div ">
                 每页显示
 
@@ -32,42 +32,40 @@
         </div>
         <div class="panel panel-default row mar_b">
             <div class="panel-heading">
-                <h2 class="panel-title">客户信息列表</h2>
+                <h2 class="panel-title">客户跟进列表</h2>
 
             </div>
             <table class="table">
                 <!-- <th>公司</th>-->
-                <th>会议名称</th>
+                <th>客户名称</th>
                 <!-- <th>职位</th>-->
-                <th>项目来源</th>
+                <th>来源</th>
 
-                <th>公司名称</th>
+                <th>跟单人员</th>
 
-                <th>会议归属地</th>
-                <th>举办详细地点</th>
-                <th>会议状态</th>
-                <th>活动负责人</th>
+                <th>最近报价情况</th>
+                <th>最近拜访情况</th>
                 <th>编辑人</th>
                 <th>备注</th>
                 <th></th>
-                @for($i=0,$mu=count($mees);$i<$mu;$i++)
+                @for($i=0,$mu=count($tracar);$i<$mu;$i++)
                     <tr>
 
-                        <td>{{ $mees[$i]['activity'] }}</td>
-                        <td>{{ $mees[$i]['op_ty']}}</td>
-                        <td>{{ $mees[$i]['customer'] }}</td>
-                        
-                        <td>{{ $mees[$i]['tpro'] }}</td>
-                        <td>{{ $mees[$i]['address'] }}</td>
-                       
-                        <td>{{ $mees[$i]['actst'] }}</td>
-                        <td>{{ $mees[$i]['activity_head'] }}</td>
+                        <td>{{ $tracar[$i]['customer'] }}</td>
+                        <td>{{ $tracar[$i]['manager']}}</td>
+                        <td>{{ $tracar[$i]['merchandiser'] }}</td>
 
-                        <td>{{ $mees[$i]['editor'] }}</td>
-                        <td>{{ $mees[$i]['remarks'] }}</td>
+                        <td>{{ $tracar[$i]['price'] }}</td>
+                        <td>{{ $tracar[$i]['accepted'] }}</td>
+
+                        <td>{{ $tracar[$i]['visit'] }}</td>
+                        <td>{{ $tracar[$i]['summary'] }}</td>
+
+                        <td>{{ $tracar[$i]['editor'] }}</td>
+                        <td>{{ $tracar[$i]['editor_time'] }}</td>
                         <td>
-                            <a href="/meetings?id={{ $mees[$i]['id'] }}">查看详情</a>
-                            <a href="/mee/edit?id={{ $mees[$i]['id'] }}">编辑</a>
+                            <a href="/meetings?id={{ $tracar[$i]['id'] }}">查看详情</a>
+                            <a href="/mee/edit?id={{ $tracar[$i]['id'] }}">编辑</a>
                         </td>
                     </tr>
                 @endfor

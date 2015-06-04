@@ -10,6 +10,7 @@ use BaseController, Form, Input, Redirect, Sentry, View,User,Auth,Customers,SetT
 class MeetingSetupController extends \BaseController{
     //
     protected function meetingList(){
+        $title = '会议活动列表页';
         $meeob=Meeting::all();
 
         $meear = array();
@@ -20,14 +21,14 @@ class MeetingSetupController extends \BaseController{
             $meear[$mi]['activity'] = $meeobr->activity_name;
             $meear[$mi]['meeting_type'] = $meeobr->meeting_type;
             $meear[$mi]['channels'] = $meeobr->channels;
-            $meear[$mi]['op_ty'] = $meeobr->customer_type;
+            $meear[$mi]['op_ty'] = $meeobr->source_type;
             $meear[$mi]['customer'] = $meeobr->customer;
             $meear[$mi]['salesman'] = $meeobr->salesman;
             $meear[$mi]['activity_head'] = $meeobr->activity_head;
             $meear[$mi]['tpro'] = $meeobr->the_province;
-            $meear[$mi]['place'] = $meeobr->place;
-            $meear[$mi]['activity_start_time'] = $meeobr->activity_start_time;
-            $meear[$mi]['activity_finish_time'] = $meeobr->activity_finish_time;
+            $meear[$mi]['address'] = $meeobr->place;
+            $meear[$mi]['s_time'] = $meeobr->activity_start_time;
+            $meear[$mi]['f_time'] = $meeobr->activity_finish_time;
             $meear[$mi]['scale'] = $meeobr->scale;
             $meear[$mi]['meetings_cycle'] = $meeobr->meetings_cycle;
             $meear[$mi]['actst'] = $meeobr->the_active_state;
@@ -39,11 +40,12 @@ class MeetingSetupController extends \BaseController{
             $mi++;
 
         }
-        return View::make('meeting.list')->with(array('mees'=>$meear));
+        return View::make('meeting.list')->with(array('mees'=>$meear,'title'=>$title));
     }
 
     //
     protected function addView(){
+        $title = '会议活动添加页';
 
         //  省份数据组装
         $pros = Provinces::all();
@@ -95,7 +97,7 @@ class MeetingSetupController extends \BaseController{
             $mear[$ir]['type'] = $mestobr->type;
             $ir++;
         }
-        return View::make('meeting.add')->with(array('optyar'=>$optyar,'proar'=>$proar,'mestar'=>$mear,'metyar'=>$metyar,'xpar'=>$xpar));
+        return View::make('meeting.add')->with(array('optyar'=>$optyar,'proar'=>$proar,'mestar'=>$mear,'metyar'=>$metyar,'xpar'=>$xpar,'title'=>$title));
     }
     //
     protected function add(){

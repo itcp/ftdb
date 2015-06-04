@@ -78,7 +78,7 @@ Route::group(array('namespace'=>'Meeting'),function(){
     Route::post('mee/edit','MeetingSetupController@edit');   // 编辑修改
 });
 
-//  客户通讯录组 for security reasons,framing is not allowed
+//  客户通讯录组
 Route::group(array('namespace'=>'CommunicationRecord'),function(){
     Route::get('cus/add','CommunicationController@addView');    //  加载添加页面视图
     Route::get('cus/edit','CommunicationController@editView');   // 编辑修改
@@ -87,11 +87,11 @@ Route::group(array('namespace'=>'CommunicationRecord'),function(){
     Route::get('cus/edjson','CommunicationController@edjson');
     Route::post('cus/poed','CommunicationController@edit');
 
-    //Route::post('city','CommunicationController@proIdcity');
-   // Route::post('city2','CommunicationController@proNamecity');
+
 });
 
 //  客户跟进组
 Route::group(array('namespace'=>'CustomerTracking'),function(){
-
+    Route::get('custra','CustomerTrackingSetController@listView');
+    Route::get('custra/add','CustomerTrackingSetController@addView');
 });

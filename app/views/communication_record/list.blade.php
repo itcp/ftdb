@@ -50,7 +50,8 @@
                             <th>编辑人</th>
                             <th>备注</th>
                             <th></th>
-                        @for($i=0;$i<count($custs);$i++)
+
+                        @for($i=0,$mu=count($custs);$i<$mu;$i++)
                             <tr>
                                 <td>
                                     <table class="table">
