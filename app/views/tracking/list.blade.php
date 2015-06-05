@@ -17,7 +17,7 @@
     <div class="container m_left">
         <div class="row mar_b">
 
-            <a href="mee/add" class="wu">添加跟进记录</a>
+            <a href="custra/add" class="wu">添加跟进记录</a>
             <div class="mm_div ">
                 每页显示
 

@@ -72,10 +72,12 @@ Route::group(array('namespace'=>'Meeting'),function(){
     Route::get('meeting','MeetingSetupController@meetingList');
     Route::get('mee/add','MeetingSetupController@addView');    //  加载添加页面视图
     Route::get('mee/edit','MeetingSetupController@editView');    //  加载添加页面视图
+    Route::get('meetings','MeetingSetupController@details');
 
     Route::post('meepro','MeetingSetupController@pos');
     Route::post('mee/poadd','MeetingSetupController@add');        //  post添加处理
     Route::post('mee/edit','MeetingSetupController@edit');   // 编辑修改
+
 });
 
 //  客户通讯录组

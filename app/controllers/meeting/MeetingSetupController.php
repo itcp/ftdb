@@ -150,10 +150,85 @@ class MeetingSetupController extends \BaseController{
 
     }
 
+    protected function details(){
+        $title = '会议活动详情页';
+        $gid = $_GET['id'];
+        $meet = Meeting::find($gid);
+
+        $serdes = ServiceDescription::where('meeting_id','=',$meet['id'])->take(10)->get();
+        $serdar = array();
+        $si=0;
+        foreach($serdes as $serdeop){
+            $serdar[$si]['service_id'] = $serdeop->service_id;
+            $serdar[$si]['service_name'] = $serdeop->service_name;
+            $serdar[$si]['conent'] = $serdeop->conent;
+            $si++;
+
+        }
+        return View::make('meeting.details')->with(array('meet'=>$meet,'serdes'=>$serdar,'title'=>$title));
+    }
+
     //
     protected function editView(){
+        $title = '会议活动添加页';
 
+        $eid = $_GET['id'];
+
+
+        //  省份数据组装
+        $pros = Provinces::all();
+        $proar = array();
+        $i = 0;
+        foreach($pros as $prory){
+            $proar[$i]['id'] = $prory->province_id;
+            $proar[$i]['pname'] = $prory->province_name;
+            $i++;
+        }
+
+        $metyid = 3;    //  会议类型ID
+        $metyob = TypeRecord::where('setup_id','=',$metyid)->take(10)->get();
+
+        $metyar = array();
+        $i = 0;
+        foreach($metyob as $metyobr){
+            $metyar[$i]['id'] = $metyobr->id;
+            $metyar[$i]['pname'] = $metyobr->type;
+            $i++;
+        }
+
+        $reid = 8;  // 项目来源ID
+        $optyob = TypeRecord::where('setup_id','=',$reid)->take(10)->get();
+        $optyar = array();
+        $ir =0;
+        foreach($optyob as $optyobr){
+            $optyar[$ir]['id'] = $optyobr->id;
+            $optyar[$ir]['type'] = $optyobr->type;
+            $ir++;
+        }
+
+        $xpid = 2;
+        $xpstob = TypeRecord::where('setup_id','=',$xpid)->take(10)->get();
+        $xpar = array();
+        $ir =0;
+        foreach($xpstob as $xpstobr){
+            $xpar[$ir]['id'] = $xpstobr->id;
+            $xpar[$ir]['type'] = $xpstobr->type;
+            $ir++;
+        }
+
+        $reid = 6;  //  会议活动状态来源ID
+        $mestob = TypeRecord::where('setup_id','=',$reid)->take(10)->get();
+        $mear = array();
+        $ir =0;
+        foreach($mestob as $mestobr){
+            $mear[$ir]['id'] = $mestobr->id;
+            $mear[$ir]['type'] = $mestobr->type;
+            $ir++;
+        }
+        return View::make('meeting.edit')->with(array('optyar'=>$optyar,'proar'=>$proar,'mestar'=>$mear,'metyar'=>$metyar,'xpar'=>$xpar,'title'=>$title));
     }
+
+
     //
     protected function edit(){
 

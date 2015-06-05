@@ -32,9 +32,19 @@ class CustomerTrackingSetController extends \BaseController{
         return View::make('tracking.list')->with(array('tracar'=>$tracar,'title'=>$title));
     }
 
-    protected function add(){
-        $title = '';
-        return View::make('tracking.list')->with(array('tracar'=>$tracar,'title'=>$title));
+    protected function addView(){
+        $title = '添加跟进页';
+        $statid=1;
+        $statop = TypeRecord::where('setup_id','=',$statid)->take(10)->get();
+        $statar=array();
+        $si=0;
+        foreach($statop as $statopr){
+            $statar[$si]['id'] = $statopr->id;
+            $statar[$si]['type'] = $statopr->type;
+            $si++;
+        }
+
+        return View::make('tracking.add')->with(array('title'=>$title,'statar'=>$statar));
 
     }
 }

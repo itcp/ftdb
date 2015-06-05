@@ -42,80 +42,80 @@
         <form  >
             <div class="panel panel-default ">
                 <div class="panel-heading">
-                    <h2 class="panel-title">添加客户信息 </h2>
+                    <h2 class="panel-title">添加跟进 </h2>
 
                 </div>
                 <table class="table">
 
                     <tr>
-                        <th>基本信息</th>
-                        <
+                        <th>跟进项目</th>
+                        <th>客户姓名</th>
+                        <th>跟进人</th>
+                        <th>跟单人员</th>
+                        <th>合同报价</th>
+                        <th>客户回访</th>
+                        <th>总结</th>
                     </tr>
-                    <tr class="jhep">
-                        <th>计划安排</th>
-                        <td colspan="4">
-
-                            <li>
-                                客户经理：<input id="customer" name="customer">
-                                活动负责人：<input id="activity_head" name="activity_head">
-                            </li>
-                            <li>
-                                举办时间:
-                                <input id="stime" name="start_time" class="time" type="text"> - <input id="ftime" name="finish_time" class="time" type="text">
-                            </li>
-                            <li>举办地点：
-                                <select name="prft" id="thepr">
-                                    <option value="广东省">省内</option>
-                                    <option value="外省">外省</option>
-                                </select>
-
-                                <select id="province"  name="province" >
-
-                                    @foreach($proar as $pr)
-                                        <option value="{{ $pr['pname'] }}">{{ $pr['pname'] }}</option>
-                                    @endforeach
-                                </select>
-                                <select id="city"  name="city">
-
-                                </select>
-                                <input id="address" name="address" style="width:300px;">
-                            </li>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
 
 
+                </table>
+                </div>
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h2 class="panel-title">添加拜访记录</h2>
+
+                </div>
+                <table class="table">
+                    <tr>
+
+                        <td>拜访主题：
+                           <input type="text">
                         </td>
+                        <td colspan="2">访问时间：<input id="bf_time" name="bf_time">-<input id="bf_time" name="bf_time"></td>
+                        <td>拜访对象：<input type="text" name="" id=""></td>
+                        <td>客户经理：<input type="text" name="" id=""></td>
 
                     </tr>
                     <tr>
-                        <th>服务需求</th>
-                        <td colspan="4" id="xpli">
-                            @foreach($xpar as $xp)
-                                <div ><input type="checkbox" value="{{ $xp['id'] }}" />{{ $xp['type'] }}<spen></spen></div>
-                            @endforeach
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th>其他信息</th>
-                        <td>活动规模：
-                            <input id="scale" name="scale">
-                        </td>
-                        <td>活动状态：
-                            <select id="me_star"  name="me_star">
-
-                                @foreach($mestar as $st)
-                                    <option value="{{ $st['type'] }}">{{ $st['type'] }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>举办周期：<input id="cycle" name="cycle"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>备注：</th>
+                        <th>总结：</th>
                         <td colspan="4"><input id="remarks" name="remarks"></td>
+                    </tr>
+                    <tr>
+                        <th>内容记录：</th>
+                        <td colspan="4"><textarea  id="cont" name="cont" style="width: 954px; height: 120px;"></textarea></td>
                     </tr>
                 </table>
 
+            </div>
+            <div class="panel panel-default ">
+
+                <table class="table">
+
+                    <tr>
+                        <th>跟进情况</th>
+                        <td>状态：
+                            <select id="stat"  name="stat" >
+                                <option value="">请选择</option>
+                                @foreach($statar as $stat)
+                                    <option value="{{ $stat['type'] }}">{{ $stat['type'] }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>情况描述：<input type="text"></td>
+
+                    </tr>
+
+
+                </table>
             </div>
             <div >
                 <button  class="btn btn-success addType right" id="butadd">确认添加</button>
