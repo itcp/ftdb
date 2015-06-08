@@ -2,7 +2,7 @@
 namespace Setup;
 /**
  * Created by PhpStorm.
- * User: bb
+ * User: it长青
  * Date: 2015/5/12
  * Time: 17:55
  */
@@ -55,7 +55,8 @@ class GoSetupController extends \BaseController{
                 $typ[$i]['editor_time'] = $re->editor_time;
                 $i++;
             }
-            return View::make('setup.index')->with(array('type' => $typ, 'type_name' => $type_name));
+            $this->layout->title='类型设置';
+            $this->layout->content= View::make('setup.index')->with(array('type' => $typ, 'type_name' => $type_name));
         }
 
     }
@@ -63,8 +64,8 @@ class GoSetupController extends \BaseController{
     protected function typeAdd(){
 
         if(Request::ajax()){
-            $typev = $_POST['type'];
-            $meun = $_POST['meun'];
+            $typev = Input::get('type');
+            $meun = Input::get('meun');
 
             $name = Auth::user()->name;
 
@@ -83,9 +84,9 @@ class GoSetupController extends \BaseController{
     //  类型字段编辑修改
     protected function typeModify(){
 
-        $type = $_POST['type'];
-        $id = $_POST['id'];
-        $meun = $_POST['meun'];
+        $type = Input::get('type');
+        $id = Input::get('id');
+        $meun = Input::get('meun');
 
         $tr = TypeRecord::find($id);
         $tr->type = $type;

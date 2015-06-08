@@ -26,7 +26,7 @@ class UserManageController extends \BaseController {
 
             $udt = array();
             $i = 0;
-            foreach ($user as $userdt) {
+            foreach ($user as $userdt){
                 $udt[$i]['id'] = $userdt->id;
                 $udt[$i]['username'] = $userdt->username;
                 $udt[$i]['name'] = $userdt->name;
@@ -41,7 +41,8 @@ class UserManageController extends \BaseController {
                 $udt[$i]['lalt'] = $userdt->last_login_time;
                 $i++;
             }
-            return View::make('dbadmin.list')->with(array('users' => $udt));
+            $this->layout->title='管理成员页';
+            $this->layout->content= View::make('dbadmin.list')->with(array('users' => $udt));
         }
 	}
     //  我的信息设置的视图组装
@@ -49,8 +50,8 @@ class UserManageController extends \BaseController {
 
         $id = Auth::user()->id;
         $user = User::find($id);
-
-        return View::make('dbadmin.useris')->with(array('users'=>$user));
+        $this->layout->title='我的设置';
+        $this->layout->content= View::make('dbadmin.useris')->with(array('users'=>$user));
     }
 
 	/**
@@ -98,13 +99,13 @@ class UserManageController extends \BaseController {
     {
         //if(Request::ajax()){
 
-            $username = $_POST['username'];
-            $name = $_POST['name'];
-            $password = $_POST['password'];
+            $username = Input::get('username');
+            $name = Input::get('name');
+            $password = Input::get('password');
             $password = Hash::make($password);
-            $sex = $_POST['sex'];
-            $phone = $_POST['phone'];
-            $identity = $_POST['identity'];
+            $sex = Input::get('sex');
+            $phone = Input::get('phone');
+            $identity = Input::get('identity');
 
             $reason = User::create(array('username' => $username,'name'=>$name,'password'=>$password,'sex'=>$sex,'phone'=>$phone,'identity'=>$identity));
 
@@ -121,13 +122,13 @@ class UserManageController extends \BaseController {
 
 	public function edit()
 	{
-        $id = $_POST['id'];
-        $username = $_POST['username'];
-        $name = $_POST['name'];
+        $id = Input::get('id');
+        $username = Input::get('username');
+        $name = Input::get('name');
 
-        $sex = $_POST['sex'];
-        $phone = $_POST['phone'];
-        $identity = $_POST['identity'];
+        $sex = Input::get('sex');
+        $phone = Input::get('phone');
+        $identity = Input::get('identity');
 
         $ured = User::find($id);
 
@@ -154,16 +155,16 @@ class UserManageController extends \BaseController {
 	 */
 	public function update()
 	{
-        $id = $_POST['id'];
-        $username = $_POST['username'];
-        $name = $_POST['name'];
+        $id = Input::get('id');
+        $username = Input::get('username');
+        $name = Input::get('name');
 
-        $sex = $_POST['sex'];
-        $telephone = $_POST['telephone'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $qq = $_POST['qq'];
-        $wechat = $_POST['wechat'];
+        $sex = Input::get('sex');
+        $telephone = Input::get('telephone');
+        $phone = Input::get('phone');
+        $email = Input::get('email');
+        $qq = Input::get('qq');
+        $wechat = Input::get('wechat');
 
         $ured = User::find($id);
 

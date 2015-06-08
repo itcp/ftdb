@@ -1,39 +1,25 @@
-<!doctype html>
-<html class="no-js" ng-app>
-<head>
-    <meta charset="utf-8">
-    <Link Rel="SHORTCUT ICON" href="http://localhost:8000/logo.ico">
-    <title>{{ $title }}</title>
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @include('_support.haed_style')
-    <link href="{{ asset('styles/meeting.css') }}" rel="stylesheet" />
-    <!--  加入jQuery-UI 及时间控件  -->
-    <link href="{{ asset('scripts/timepicker-addon/jquery-ui-timepicker-addon.css') }}" rel="stylesheet" type="text/css" />
-    <link type="text/css" href="{{ asset('scripts/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet" />
+
+<link href="{{ asset('styles/meeting.css') }}" rel="stylesheet" />
+<!--  加入jQuery-UI 及时间控件  -->
+<link href="{{ asset('scripts/timepicker-addon/jquery-ui-timepicker-addon.css') }}" rel="stylesheet" type="text/css" />
+<link type="text/css" href="{{ asset('scripts/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet" />
 
 
-    <script type="text/javascript" src="{{ asset('scripts/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('scripts/timepicker-addon/jquery-ui-timepicker-addon.js') }}"></script>
+<script type="text/javascript" src="{{ asset('scripts/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('scripts/timepicker-addon/jquery-ui-timepicker-addon.js') }}"></script>
 
-    <script src="{{ asset('scripts/timepicker-addon/jquery.datepicker-zh-CN.js') }}"></script>
-    <script src="{{ asset('scripts/timepicker-addon/i18n/jquery-ui-timepicker-zh-CN.js') }}"></script>
-    <script type="text/javascript">
-        jQuery(function () {
-            // 时间设置
-            jQuery('#stime,#ftime').datetimepicker({
-                timeFormat: "HH:mm",
-                dateFormat: "yy-mm-dd"
-            });
-
+<script src="{{ asset('scripts/timepicker-addon/jquery.datepicker-zh-CN.js') }}"></script>
+<script src="{{ asset('scripts/timepicker-addon/i18n/jquery-ui-timepicker-zh-CN.js') }}"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        // 时间设置
+        jQuery('#stime,#ftime').datetimepicker({
+            timeFormat: "HH:mm",
+            dateFormat: "yy-mm-dd"
         });
-    </script>
 
-</head>
-<body>
-
-@include('_layouts.headnav')
+    });
+</script>
 <div class="container">
     <div class="container">
         <div class="row mar_b">
@@ -118,7 +104,3 @@
 <script src="{{ asset('scripts/city2.js') }}"></script>
 <script src="{{ asset('scripts/meeting/meeinptx.js') }}"></script>
 <script src="{{ asset('scripts/meeting/meeadd.js') }}"></script>
-@include('_support.foot_js')
-
-</body>
-</html>

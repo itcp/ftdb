@@ -2,7 +2,7 @@
 namespace CustomerTracking;
 /**
  * Created by PhpStorm.
- * User: bb
+ * User: it长青
  * Date: 2015/5/26
  * Time: 11:40
  */
@@ -10,7 +10,7 @@ use BaseController, Form, Input, Redirect, Sentry, View,User,Auth,Customers,SetT
 
 class CustomerTrackingSetController extends \BaseController{
 
-    protected function listView(){
+    public function listView(){
         $title = '客户跟进列表页';
         $trac = CustomerTracking::all();
         $tracar = array();
@@ -29,7 +29,10 @@ class CustomerTrackingSetController extends \BaseController{
             $tracr[$ti]['editor_time'] = $tract->editor_time;
 
         }
-        return View::make('tracking.list')->with(array('tracar'=>$tracar,'title'=>$title));
+        $this->layout->content = View::make('tracking.list');
+        $this->layout->content->tracar = $tracar;
+        $this->layout->title = $title;
+
     }
 
     protected function addView(){
@@ -44,7 +47,7 @@ class CustomerTrackingSetController extends \BaseController{
             $si++;
         }
 
-        return View::make('tracking.add')->with(array('title'=>$title,'statar'=>$statar));
-
+        $this->layout->content= View::make('tracking.add')->with(array('statar'=>$statar));
+        $this->layout->title=$title;
     }
 }

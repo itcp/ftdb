@@ -2,7 +2,7 @@
 namespace CommunicationRecord;
 /**
  * Created by PhpStorm.
- * User: bb
+ * User: it长青
  * Date: 2015/5/6
  * Time: 17:33
  */
@@ -43,12 +43,9 @@ class CommunicationController extends \BaseController{
                 $custs[$i]['editor'] = $cus->editor;
                 $i++;
             }
-            /*
-             * @foreach($city as $ciy)
-                                    <option value="{{ $ciy['id'] }}">{{ $ciy['city_name'] }}</option>
-                                @endforeach
-             * */
-            return View::make('communication_record.list')->with(array('custs' => $custs));
+            $this->layout->title='客户通迅录';
+            $this->layout->content= View::make('communication_record.list')->with(array('custs' => $custs));
+
         }else{
             $us_na = Auth::user()->name;
             $cust = Customers::where('editor', '=', $us_na)->take(10)->get();
@@ -79,7 +76,8 @@ class CommunicationController extends \BaseController{
                 $custs[$i]['editor'] = $cus->editor;
                 $i++;
             }
-            return View::make('communication_record.list')->with(array('custs' => $custs));
+            $this->layout->title='客户通迅录';
+            $this->layout->content=View::make('communication_record.list')->with(array('custs' => $custs));
 
         }
 
@@ -117,8 +115,8 @@ class CommunicationController extends \BaseController{
             $proar[$i]['pname'] = $prory->province_name;
             $i++;
         }
-
-        return View::make('communication_record.add')->with(array('sty'=>$trec,'province'=>$proar,'rear'=>$rear));
+        $this->layout->title='添加客户通迅录';
+        $this->layout->content= View::make('communication_record.add')->with(array('sty'=>$trec,'province'=>$proar,'rear'=>$rear));
     }
 //  添加功能
     protected function add(){
@@ -126,20 +124,35 @@ class CommunicationController extends \BaseController{
 
             $name = Auth::user()->name;
 
-            $proob = Provinces::where('province_id','=',$_POST['province']) ->take(10)->get();
+            $proob = Provinces::where('province_id','=',Input::get('province')) ->take(10)->get();
             $prona = '';
             foreach($proob as $proobr){
                 $prona = $proobr->province_name;
             }
 
-            $citob = Citys::where('city_id','=',$_POST['city']) ->take(10)->get();
+            $citob = Citys::where('city_id','=',Input::get('city')) ->take(10)->get();
             $citna = '';
             foreach($citob as $citobr){
                 $citna = $citobr->city_name;
             }
 
-            $address =$prona.$citna.$_POST['address'];
-            $couadd = Customers::create(array('company' => $_POST['company'],'contact'=>$_POST['contact'],'position'=> $_POST['position'],'sex'=> $_POST['sex'],'telephone'=> $_POST['telephone'],'phone'=> $_POST['phone'],'email'=> $_POST['email'],'relationship_between_state'=> $_POST['rbs'],'province'=> $_POST['province'],'city'=> $_POST['city'],'address'=> $address,'reason'=> $_POST['reason'],'editor'=>$name,'remarks'=>$_POST['remarks']));
+            $address =$prona.$citna.Input::get('address');
+            $couadd = Customers::create(array(
+                'company' => Input::get('company'),
+                'contact'=>Input::get('contact'),
+                'position'=> Input::get('position'),
+                'sex'=> Input::get('sex'),
+                'telephone'=> Input::get('telephone'),
+                'phone'=> Input::get('phone'),
+                'email'=> Input::get('email'),
+                'relationship_between_state'=> Input::get('rbs'),
+                'province'=> Input::get('province'),
+                'city'=> Input::get('city'),
+                'address'=> $address,
+                'reason'=> Input::get('reason'),
+                'editor'=>$name,
+                'remarks'=>Input::get('remarks')
+            ));
             if($couadd==true){
                 echo 1;
             }else{
@@ -184,13 +197,15 @@ class CommunicationController extends \BaseController{
             $proar[$i]['pname'] = $prory->province_name;
             $i++;
         }
-
-        return View::make('communication_record.edit')->with(array('sty'=>$trec,'province'=>$proar,'rear'=>$rear,'cus'=>$cus));
+        $this->layout->title='编辑客户通迅录';
+        $this->layout->content= View::make('communication_record.edit')->with(array('sty'=>$trec,'province'=>$proar,'rear'=>$rear,'cus'=>$cus));
     }
 
     protected function edjson(){
         if(Request::ajax()) {
-            $cusid = $_POST['id'];
+            $cusid = Input::get('
+id')
+;
             $cus = Customers::find($cusid);
 
             echo json_encode($cus);
@@ -200,37 +215,41 @@ class CommunicationController extends \BaseController{
 // 编辑修改功能
     protected function edit(){
         if(Request::ajax()) {
-           // echo $_POST['company'].'d';
+           // echo Input::get('company').'d';
             $name = Auth::user()->name;
-            $id = $_POST['id'];
+            $id = Input::get('id')
+;
 
             $tr = Customers::find($id);
-            $proob = Provinces::where('province_id','=',$_POST['province']) ->take(10)->get();
+            $proob = Provinces::where('province_id','=',Input::get('province')
+) ->take(10)->get();
             $prona = '';
             foreach($proob as $proobr){
                 $prona = $proobr->province_name;
             }
 
-            $citob = Citys::where('city_id','=',$_POST['city']) ->take(10)->get();
+            $citob = Citys::where('city_id','=',Input::get('city')) ->take(10)->get();
             $citna = '';
             foreach($citob as $citobr){
                 $citna = $citobr->city_name;
             }
 
-            $address =$prona.$citna.$_POST['address'];
+            $address =$prona.$citna.Input::get('address');
 
-            $tr->company = $_POST['company'];
-            $tr->contact = $_POST['contact'];
-            $tr->sex = $_POST['sex'];
-            $tr->position = $_POST['position'];
-            $tr->telephone = $_POST['telephone'];
-            $tr->phone = $_POST['phone'];
-            $tr->email = $_POST['email'];
-            $tr->province = $_POST['province'];
-            $tr->city = $_POST['city'];
+            $tr->company = Input::get('company');
+            $tr->contact = Input::get('contact');
+            $tr->sex = Input::get('sex');
+            $tr->position = Input::get('position');
+            $tr->telephone = Input::get('telephone');
+            $tr->phone = Input::get('phone');
+            $tr->email = Input::get('email');
+            $tr->province = Input::get('province');
+            $tr->city = Input::get('city');
             $tr->address = $address;
-            $tr->relationship_between_state = $_POST['rbs'];
-            $tr->remarks = $_POST['remarks'];
+            $tr->relationship_between_state = Input::get('rbs')
+;
+            $tr->remarks = Input::get('remarks')
+;
             $tr->editor = $name;
 
             $hz=array();

@@ -2,7 +2,7 @@
 namespace Meeting;
 /**
  * Created by PhpStorm.
- * User: bb
+ * User: it长青
  * Date: 2015/5/26
  * Time: 11:34
  */
@@ -40,7 +40,8 @@ class MeetingSetupController extends \BaseController{
             $mi++;
 
         }
-        return View::make('meeting.list')->with(array('mees'=>$meear,'title'=>$title));
+        $this->layout->title='会议活动列表';
+        $this->layout->content= View::make('meeting.list')->with(array('mees'=>$meear,'title'=>$title));
     }
 
     //
@@ -97,7 +98,9 @@ class MeetingSetupController extends \BaseController{
             $mear[$ir]['type'] = $mestobr->type;
             $ir++;
         }
-        return View::make('meeting.add')->with(array('optyar'=>$optyar,'proar'=>$proar,'mestar'=>$mear,'metyar'=>$metyar,'xpar'=>$xpar,'title'=>$title));
+
+        $this->layout->title=$title;
+        $this->layout->content= View::make('meeting.add')->with(array('optyar'=>$optyar,'proar'=>$proar,'mestar'=>$mear,'metyar'=>$metyar,'xpar'=>$xpar,'title'=>$title));
     }
     //
     protected function add(){
@@ -111,20 +114,31 @@ class MeetingSetupController extends \BaseController{
             foreach($acttf as $acttfr){
                 $actn=$acttfr->activity_name;
             }
-            if($actn==$_POST['act_name']){
+            if($actn==Input::get('act_name')){
                 echo "此会议同名记录已有，请确认后填写！";
                 exit;
             }
 
-            $place=$_POST['province'].$_POST['city'].$_POST['address'];
+            $place=Input::get('province').Input::get('city').Input::get('address');
 
-            $meein = Meeting::create(array('activity_name'=>Input::get('act_name'),'meeting_type'=>
-            $_POST['meetype'],'channels'=>$_POST['channels'],'source_type'=>$_POST['source_ty']
-            ,'customer'=>$_POST['company'],'salesman'=>$_POST['customer'],'activity_head'=>$_POST['act_head'],
-                'the_province'=>$_POST['thepr'],'place'=>$place,'activity_start_time'
-            =>$_POST['stime'],'activity_finish_time'=>$_POST['ftime'],'scale'=>$_POST['scale'],
-                'meetings_cycle'=>$_POST['cycle'],'the_active_state'=>$_POST['me_star'],'editor'
-            =>$editor,'remarks'=>$_POST['remarks']));
+            $meein = Meeting::create(array(
+				'activity_name'=>Input::get('act_name'),
+				'meeting_type'=>Input::get('meetype'),
+				'channels'=>Input::get('channels'),
+				'source_type'=>Input::get('source_ty'),
+				'customer'=>Input::get('company'),
+				'salesman'=>Input::get('customer'),
+				'activity_head'=>Input::get('act_head'),
+                'the_province'=>Input::get('thepr'),
+				'place'=>$place,
+				'activity_start_time'=>Input::get('stime'),
+				'activity_finish_time'=>Input::get('ftime'),
+				'scale'=>Input::get('scale'),
+                'meetings_cycle'=>Input::get('cycle'),
+				'the_active_state'=>Input::get('me_star'),
+				'editor'=>$editor,
+				'remarks'=>Input::get('remarks')
+			));
             $meeid='';
             if($meein){
                 $actnt=Input::get('act_name');
@@ -137,7 +151,12 @@ class MeetingSetupController extends \BaseController{
             $xpar = json_decode(Input::get('xpli'));
             $xpco = count($xpar);
             for($i=0;$i<$xpco;$i++){
-                $serin = ServiceDescription::create(array('meeting_id'=>$meeid,'service_id'=>$xpar[$i][0],'service_name'=>$xpar[$i][1],'conent'=>$xpar[$i][2]));
+                $serin = ServiceDescription::create(array(
+					'meeting_id'=>$meeid,
+					'service_id'=>$xpar[$i][0],
+					'service_name'=>$xpar[$i][1],
+					'conent'=>$xpar[$i][2]
+				));
 
                 if(serin==false){
                     echo "保存服务要求记录失败！";
@@ -165,7 +184,8 @@ class MeetingSetupController extends \BaseController{
             $si++;
 
         }
-        return View::make('meeting.details')->with(array('meet'=>$meet,'serdes'=>$serdar,'title'=>$title));
+        $this->layout->title=$title;
+        $this->layout->content= View::make('meeting.details')->with(array('meet'=>$meet,'serdes'=>$serdar,'title'=>$title));
     }
 
     //
@@ -173,7 +193,6 @@ class MeetingSetupController extends \BaseController{
         $title = '会议活动添加页';
 
         $eid = $_GET['id'];
-
 
         //  省份数据组装
         $pros = Provinces::all();
@@ -225,7 +244,8 @@ class MeetingSetupController extends \BaseController{
             $mear[$ir]['type'] = $mestobr->type;
             $ir++;
         }
-        return View::make('meeting.edit')->with(array('optyar'=>$optyar,'proar'=>$proar,'mestar'=>$mear,'metyar'=>$metyar,'xpar'=>$xpar,'title'=>$title));
+        $this->layout->title=$title;
+        $this->layout->content= View::make('meeting.edit')->with(array('optyar'=>$optyar,'proar'=>$proar,'mestar'=>$mear,'metyar'=>$metyar,'xpar'=>$xpar,'title'=>$title));
     }
 
 

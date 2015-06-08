@@ -1,14 +1,4 @@
-<!doctype html>
-<html class="no-js" ng-app>
-<head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
 
-    @include('_support.haed_style')
-
-</head>
 <div class="container">
 
     {{ Form::open(array('url'=>'admin/login')) }}
@@ -51,7 +41,4 @@
 
 </div>
 
-    @include('_support.foot_js')
 
-</body>
-</html>
