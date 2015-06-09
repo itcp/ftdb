@@ -19,11 +19,12 @@ class HomeController extends BaseController {
 	{
 		return View::make('hello');
 	}
+
     //  城市列表的获取： 1、以省级id获得城市名返回
     protected function proIdcity(){
         if(Request::ajax()){
-            $proid = $_POST['proid'];
-            $cityob = Citys::where('province_id','=',$proid) ->take(10)->get();
+            $proid = Input::get('proid');
+            $cityob = Citys::where('province_id','=',$proid)->get();
 
             $cityar = array();
             $i=0;
@@ -32,21 +33,23 @@ class HomeController extends BaseController {
                 $cityar[$i]['city_name'] = $citob->city_name;
                 $i++;
             }
-            echo json_encode($cityar);
+
+            return json_encode($cityar);
+            exit;
         }
     }
 
     //  城市列表的获取： 1、以省级 name 获得城市名返回
     protected function proNamecity(){
         if(Request::ajax()){
-            $proid = $_POST['proname'];
-            $pro = Provinces::where('province_name','=',$proid)->take(10)->get();
+            $proid = Input::get('proname');
+            $pro = Provinces::where('province_name','=',$proid)->get();
 
             foreach($pro as $pror){
                 $proid=$pror->province_id;
             }
 
-            $cityob = Citys::where('province_id','=',$proid) ->take(10)->get();
+            $cityob = Citys::where('province_id','=',$proid)->get();
 
             $cityar = array();
             $i=0;
@@ -56,6 +59,7 @@ class HomeController extends BaseController {
                 $i++;
             }
             echo json_encode($cityar);
+            exit;
         }
     }
 

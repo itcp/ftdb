@@ -2,6 +2,7 @@ $(document).ready(function(){
 
     $("#butadd").click(function(){
 
+        var id= $("#id").val();
         var act_name = $("#activity_name").val();
         var company = $("#company").val();
         var meetype = $("#meetype").val();
@@ -26,11 +27,11 @@ $(document).ready(function(){
 
             if(xpli[num].getElementsByTagName('input')[0].checked){
 
-                    var ssl = xpli[num].getElementsByTagName('input')[0].value;
-                    var sss = xpli[num].textContent;
-                    var ssv = xpli[num].getElementsByTagName('spen')[0].getElementsByTagName('input')[0].value;
+                var ssl = xpli[num].getElementsByTagName('input')[0].value;
+                var sss = xpli[num].textContent;
+                var ssv = xpli[num].getElementsByTagName('spen')[0].getElementsByTagName('input')[0].value;
 
-                    ar[num] = [ssl, sss, ssv];
+                ar[num] = [ssl, sss, ssv];
             }
         }
 
@@ -48,8 +49,9 @@ $(document).ready(function(){
         var cycle = $("#cycle").val();
         var remarks = $("#remarks").val();
 
-        $.post("/mee/poadd",
+        $.post("/mee/edit",
             {
+                id:id,
                 act_name:act_name,
                 company:company,
                 meetype:meetype,
@@ -75,9 +77,13 @@ $(document).ready(function(){
 
             function(data,status){
                 alert(data);
+                /*if(data == 1){
+                 alert( "成功");
+                 }else if(data == 2){
+                 alert("未能添加通讯中，请重新提交！");
+                 }*/
 
             });
-
 
 
     })

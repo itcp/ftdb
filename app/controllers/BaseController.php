@@ -20,6 +20,9 @@ class BaseController extends Controller {
             $sety = SetType::all();
             $si = 0;
             $setar=array();
+            $title='';
+           $this->layout->title='';
+            $this->layout->content='';
             foreach($sety as $setyop){
                 $setar[$si]['id'] = $setyop->id;
                 $setar[$si]['name'] = $setyop->type_name;

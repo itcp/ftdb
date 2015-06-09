@@ -48,7 +48,7 @@ class CommunicationController extends \BaseController{
 
         }else{
             $us_na = Auth::user()->name;
-            $cust = Customers::where('editor', '=', $us_na)->take(10)->get();
+            $cust = Customers::where('editor', '=', $us_na)->get();
 
             $custs = array();
             $i = 0;
@@ -86,7 +86,7 @@ class CommunicationController extends \BaseController{
     protected function addView(){
 
         $reid = 5;  //  客户来源ID
-        $reas = TypeRecord::where('setup_id','=',$reid)->take(10)->get();
+        $reas = TypeRecord::where('setup_id','=',$reid)->get();
         $rear = array();
         $ir =0;
         foreach($reas as $reass){
@@ -96,7 +96,7 @@ class CommunicationController extends \BaseController{
         }
 
         $stid = 7;  // 合作状态ID
-        $stype = TypeRecord::where('setup_id','=',$stid)->take(10)->get();
+        $stype = TypeRecord::where('setup_id','=',$stid)->get();
 
        $trec = array();
         $i=0;
@@ -124,13 +124,13 @@ class CommunicationController extends \BaseController{
 
             $name = Auth::user()->name;
 
-            $proob = Provinces::where('province_id','=',Input::get('province')) ->take(10)->get();
+            $proob = Provinces::where('province_id','=',Input::get('province')) ->get();
             $prona = '';
             foreach($proob as $proobr){
                 $prona = $proobr->province_name;
             }
 
-            $citob = Citys::where('city_id','=',Input::get('city')) ->take(10)->get();
+            $citob = Citys::where('city_id','=',Input::get('city')) ->get();
             $citna = '';
             foreach($citob as $citobr){
                 $citna = $citobr->city_name;
@@ -168,7 +168,7 @@ class CommunicationController extends \BaseController{
         $cus = Customers::find($cusid);
 
         $reid = 5;  //  客户来源ID
-        $reas = TypeRecord::where('setup_id','=',$reid)->take(10)->get();
+        $reas = TypeRecord::where('setup_id','=',$reid)->get();
         $rear = array();
         $ir =0;
         foreach($reas as $reass){
@@ -178,7 +178,7 @@ class CommunicationController extends \BaseController{
         }
 
         $stid = 7;  // 合作状态ID
-        $stype = TypeRecord::where('setup_id','=',$stid)->take(10)->get();
+        $stype = TypeRecord::where('setup_id','=',$stid)->get();
 
         $trec = array();
         $i=0;
@@ -203,9 +203,7 @@ class CommunicationController extends \BaseController{
 
     protected function edjson(){
         if(Request::ajax()) {
-            $cusid = Input::get('
-id')
-;
+            $cusid = Input::get('id');
             $cus = Customers::find($cusid);
 
             echo json_encode($cus);
@@ -214,21 +212,19 @@ id')
 
 // 编辑修改功能
     protected function edit(){
-        if(Request::ajax()) {
-           // echo Input::get('company').'d';
+        if(Request::ajax()){
+
             $name = Auth::user()->name;
-            $id = Input::get('id')
-;
+            $id = Input::get('id');
 
             $tr = Customers::find($id);
-            $proob = Provinces::where('province_id','=',Input::get('province')
-) ->take(10)->get();
+            $proob = Provinces::where('province_id','=',Input::get('province')) ->get();
             $prona = '';
             foreach($proob as $proobr){
                 $prona = $proobr->province_name;
             }
 
-            $citob = Citys::where('city_id','=',Input::get('city')) ->take(10)->get();
+            $citob = Citys::where('city_id','=',Input::get('city')) ->get();
             $citna = '';
             foreach($citob as $citobr){
                 $citna = $citobr->city_name;
@@ -246,25 +242,22 @@ id')
             $tr->province = Input::get('province');
             $tr->city = Input::get('city');
             $tr->address = $address;
-            $tr->relationship_between_state = Input::get('rbs')
-;
-            $tr->remarks = Input::get('remarks')
-;
+            $tr->relationship_between_state = Input::get('rbs');
+            $tr->remarks = Input::get('remarks');
             $tr->editor = $name;
 
             $hz=array();
-            if ($tr->save()) {
+            if ($tr->save()){
 
                 $hz['add']=$address;
                 $hz['ft']=1;
                 //return Redirect::to('setup?meun='.$meun.'');
                 return $hz;
-            } else {
+            }else{
                 $hz['ft']=2;
                 return $hz;
             }
         }
     }
-
 
 }

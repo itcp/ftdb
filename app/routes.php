@@ -40,8 +40,8 @@ Route::get('setup',array('before'=>'login_n',function()
 Route::group(array('namespace'=>'CommunicationRecord'),function(){
     Route::get('home','CommunicationController@home');
 
-
 });
+
 //  有要调用地区二级菜单时返回城市列表
 Route::post('city','HomeController@proIdcity');
 Route::post('cityn','HomeController@proNamecity');
@@ -65,6 +65,7 @@ Route::group(array('namespace'=>'Setup'),function(){
     Route::post('setupadd','GoSetupController@typeAdd');
     Route::get('setup','GoSetupController@typeView');
     Route::post('setuped','GoSetupController@typeModify');
+
 });
 
 //  会议活动组
@@ -77,6 +78,7 @@ Route::group(array('namespace'=>'Meeting'),function(){
     Route::post('meepro','MeetingSetupController@pos');
     Route::post('mee/poadd','MeetingSetupController@add');        //  post添加处理
     Route::post('mee/edit','MeetingSetupController@edit');   // 编辑修改
+    Route::post('/mee/dateyz','MeetingSetupController@yz');
 
 });
 
@@ -88,7 +90,6 @@ Route::group(array('namespace'=>'CommunicationRecord'),function(){
     Route::post('cusadd','CommunicationController@add');        //  post添加处理
     Route::get('cus/edjson','CommunicationController@edjson');
     Route::post('cus/poed','CommunicationController@edit');
-
 
 });
 

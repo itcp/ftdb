@@ -6,7 +6,10 @@ namespace Setup;
  * Date: 2015/5/12
  * Time: 17:55
  */
-use BaseController, Form, Input, Redirect, Sentry, View,Request,Auth,Reason,DB,Config,TypeRecord,SetType;
+use BaseController, Form, Input, Redirect, Sentry, View,Request,Auth,Reason,DB,Config,TypeRecord,SetType,Provinces,Citys;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+
 class GoSetupController extends \BaseController{
 
     //  视图加载
@@ -25,7 +28,7 @@ class GoSetupController extends \BaseController{
             $ype = SetType::find($meun);
             $type_name = $ype->type_name;
 
-            $type = TypeRecord::where('id','=',$_GET['id'])->take(10)->get();
+            $type = TypeRecord::where('id','=',$_GET['id'])->get();
             $typ = array();
             foreach ($type as $re) {
                 $typ['id'] = $re->id;
@@ -44,7 +47,7 @@ class GoSetupController extends \BaseController{
 
             //  取得相应栏目的数据，并把数据对象转换成数组格式
 
-            $type = TypeRecord::where('setup_id', '=', $meun)->take(10)->get();
+            $type = TypeRecord::where('setup_id', '=', $meun)->get();
 
             $i = 0;
             $typ = array();
@@ -101,4 +104,7 @@ class GoSetupController extends \BaseController{
         $tr = TypeRecord::find($id);
         $tr ->delete();
     }
+
+
+
 }

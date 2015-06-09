@@ -38,7 +38,7 @@ class CustomerTrackingSetController extends \BaseController{
     protected function addView(){
         $title = '添加跟进页';
         $statid=1;
-        $statop = TypeRecord::where('setup_id','=',$statid)->take(10)->get();
+        $statop = TypeRecord::where('setup_id','=',$statid)->get();
         $statar=array();
         $si=0;
         foreach($statop as $statopr){

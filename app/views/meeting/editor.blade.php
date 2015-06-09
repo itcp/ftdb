@@ -29,19 +29,19 @@
         <form  >
             <div class="panel panel-default ">
                 <div class="panel-heading">
-                    <h2 class="panel-title">添加客户信息 </h2>
+                    <h2 class="panel-title">编辑信息 </h2>
 
                 </div>
                 <table class="table">
 
                     <tr>
                         <th>基本信息</th>
-                        <td >活动名称：<input id="activity_name" name="activity_name" value="请将填写的会议加上届数" onfocus="if (value =='请将填写的会议加上届数'){value =''}"></td>
+                        <td >活动名称：<input id="activity_name" name="activity_name" value="{{ $meetar['activity_name'] }}" onfocus="if (value ==''){value =''}"></td>
 
 
-                        <td>举办公司：<input id="company" name="company"></td>
+                        <td>举办公司：<input id="company" name="company"  value="{{ $meetar['customer'] }}"></td>
                         <td>活动类型：
-                            <select name="mety" id="meetype">
+                            <select name="mety" id="meetype" value="{{ $meetar['meeting_type'] }}">
                                 @foreach($metyar as $ar)
                                     <option value="{{ $ar['pname'] }}">{{ $ar['pname'] }}</option>
                                 @endforeach
@@ -50,11 +50,11 @@
                         <td>
 
                             项目来源：
-                            <select id="channels"  name="channels">
+                            <select id="channels"  name="channels"  value="{{ $meetar['channels'] }}">
                                 <option value="线上">线上</option>
                                 <option value="线下">线下</option>
                             </select>
-                            <select id="source_type" name="source_type">
+                            <select id="source_type" name="source_type"  value="{{ $meetar['source_type'] }}">
                                 @foreach($optyar as $opty)
                                     <option value="{{ $opty['type'] }}">{{ $opty['type'] }}</option>
                                 @endforeach
@@ -67,14 +67,14 @@
                         <td colspan="4">
 
                             <li>
-                                客户经理：<input id="customer" name="customer">
+                                客户经理：<input id="customer" name="customer"  value="{{ $meetar['customer'] }}">
                                 活动负责人：<input id="activity_head" name="activity_head">
                             </li>
                             <li>
                                 举办时间:
-                                <input id="stime" name="start_time" class="time" type="text"> - <input id="ftime" name="finish_time" class="time" type="text">
+                                <input id="stime" name="start_time"  value="{{ $meetar['activity_start_time'] }}" class="time" type="text"> - <input id="ftime"  value="{{ $meetar['activity_finish_time'] }}" name="finish_time" class="time" type="text">
                             </li>
-                            <li>举办地点：
+                            <li>举办地点：{{ $meetar['place'] }}<br />
                                 <select name="prft" id="thepr">
                                     <option value="广东省">省内</option>
                                     <option value="外省">外省</option>
@@ -108,23 +108,24 @@
                     <tr>
                         <th>其他信息</th>
                         <td>活动规模：
-                            <input id="scale" name="scale">
+                            <input id="scale" name="scale"  value="{{ $meetar['scale'] }}">
                         </td>
                         <td>活动状态：
-                            <select id="me_star"  name="me_star">
+                            <select id="me_star"  name="me_star"  value="{{ $meetar['the_active_state'] }}">
 
                                 @foreach($mestar as $st)
                                     <option value="{{ $st['type'] }}">{{ $st['type'] }}</option>
                                 @endforeach
                             </select>
                         </td>
-                        <td>举办周期：<input id="cycle" name="cycle"></td>
+                        <td>举办周期：<input id="cycle" name="cycle"  value="{{ $meetar['meetings_cycle'] }}"></td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>备注：</th>
-                        <td colspan="4"><input id="remarks" name="remarks"></td>
+                        <td colspan="4"><input id="remarks" name="remarks"  value="{{ $meetar['remarks'] }}"></td>
                     </tr>
+                    <input type="hidden" value="{{ $meetar['id'] }}" id="id">
                 </table>
 
             </div>
@@ -136,7 +137,6 @@
 
 </div>
 
-
 <script src="{{ asset('scripts/city2.js') }}"></script>
 <script src="{{ asset('scripts/meeting/meeinptx.js') }}"></script>
-<script src="{{ asset('scripts/meeting/meeadd.js') }}"></script>
+<script src="{{ asset('scripts/meeting/mee_edit.js') }}"></script>
