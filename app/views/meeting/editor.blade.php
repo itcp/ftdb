@@ -92,7 +92,6 @@
                                 <input id="address" name="address" style="width:300px;">
                             </li>
 
-
                         </td>
 
                     </tr>
@@ -110,13 +109,7 @@
                         <td>活动规模：
                             <input id="scale" name="scale"  value="{{ $meetar['scale'] }}">
                         </td>
-                        <td>活动状态：
-                            <select id="me_star"  name="me_star"  value="{{ $meetar['the_active_state'] }}">
-
-                                @foreach($mestar as $st)
-                                    <option value="{{ $st['type'] }}">{{ $st['type'] }}</option>
-                                @endforeach
-                            </select>
+                        <td>
                         </td>
                         <td>举办周期：<input id="cycle" name="cycle"  value="{{ $meetar['meetings_cycle'] }}"></td>
                         <td></td>
@@ -130,7 +123,8 @@
 
             </div>
             <div >
-                <button  class="btn btn-success addType right" id="butadd">确认添加</button>
+                <a href="/custra/add?id={{ $meetar['id'] }}" class="btn btn-success addType right">跟进</a>
+                <button  class="btn btn-success addType right" id="butadd">确认修改</button>
             </div>
         </form>
     </div>

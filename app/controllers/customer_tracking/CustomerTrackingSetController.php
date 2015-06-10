@@ -6,7 +6,7 @@ namespace CustomerTracking;
  * Date: 2015/5/26
  * Time: 11:40
  */
-use BaseController, Form, Input, Redirect, Sentry, View,User,Auth,Customers,SetType,TypeRecord,Provinces,Citys,Request,CustomerTracking,Situation;
+use BaseController, Form, Input, Redirect, Sentry, View,User,Auth,Customers,SetType,TypeRecord,Provinces,Citys,Request,CustomerTracking,Situation,Meeting,ServiceDescription,VisitingRecord;
 
 class CustomerTrackingSetController extends \BaseController{
 
@@ -36,6 +36,21 @@ class CustomerTrackingSetController extends \BaseController{
     }
 
     protected function addView(){
+        $act_name = '';
+        $company = '';
+        $customer = '';
+        $act_head = '';
+        $mid = '';
+
+        if(isset($_GET['id'])){
+            $base = Meeting::find($_GET['id']);
+            $act_name = 'value="'.$base['activity_name'].'"';
+            $company = 'value="'.$base['customer'].'"';
+            $customer = 'value="'.$base['salesman'].'"';
+            $act_head = 'value="'.$base['activity_head'].'"';
+            $mid = $_GET['id'];
+        }
+
         $title = '添加跟进页';
         $statid=1;
         $statop = TypeRecord::where('setup_id','=',$statid)->get();
@@ -47,7 +62,31 @@ class CustomerTrackingSetController extends \BaseController{
             $si++;
         }
 
-        $this->layout->content= View::make('tracking.add')->with(array('statar'=>$statar));
+        $this->layout->content= View::make('tracking.add')->with(array('statar'=>$statar,'act_name'=>$act_name));
+        $this->layout->content->act_head=$mid;
+        $this->layout->content->company=$company;
+        $this->layout->content->customer = $customer;
+        $this->layout->content->act_head=$act_head;
         $this->layout->title=$title;
     }
+
+    protected function add(){
+        if(Request::ajax()){
+            //
+            $trazt = new CustomerTracking();
+            $trazt->meeting_name = Input::get('');
+            $trazt->meeting_id = Input::get('mid');
+            $trazt->customer_name = Input::get('');
+            $trazt->customer_manager = Input::get('');
+            $trazt->merchandiser = Input::get('');
+            $trazt->contract_price = Input::get('');
+            $trazt->visit = Input::get('');
+            $trazt->summary_reason = Input::get('');
+
+            $trazt->save();
+
+            //
+        }
+    }
+
 }

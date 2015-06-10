@@ -12,7 +12,7 @@
 <script type="text/javascript">
     jQuery(function () {
         // 时间设置
-        jQuery('#stime,#ftime').datetimepicker({
+        jQuery('#bs_time,#bf_time').datetimepicker({
             timeFormat: "HH:mm",
             dateFormat: "yy-mm-dd"
         });
@@ -28,7 +28,7 @@
         <form  >
             <div class="panel panel-default ">
                 <div class="panel-heading">
-                    <h2 class="panel-title">添加跟进 </h2>
+                    <h2 class="panel-title">添加跟进 <input type="hidden" id="mid" value="{{ $mid }}"></h2>
 
                 </div>
                 <table class="table">
@@ -43,15 +43,14 @@
                         <th>总结</th>
                     </tr>
                     <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
+                        <td><input type="text" {{ $act_name }} id="act_name"></td>
+                        <td><input type="text" id="cou_name"></td>
+                        <td><input type="text" {{ $customer }} id="salesman"></td>
+                        <td><input type="text" {{ $act_head }} id="act_head"></td>
+                        <td><input type="text" id="price"></td>
+                        <td><input type="text" id="visit"></td>
+                        <td><input type="text" id="summary"></td>
                     </tr>
-
 
                 </table>
                 </div>
@@ -64,20 +63,20 @@
                     <tr>
 
                         <td>拜访主题：
-                           <input type="text">
+                           <input type="text" id="acc_theme">
                         </td>
-                        <td colspan="2">访问时间：<input id="bf_time" name="bf_time">-<input id="bf_time" name="bf_time"></td>
-                        <td>拜访对象：<input type="text" name="" id=""></td>
-                        <td>客户经理：<input type="text" name="" id=""></td>
+                        <td colspan="2">访问时间：<input id="bs_time" name="bf_time">-<input id="bf_time" name="bf_time"></td>
+                        <td>拜访对象：<input type="text" name="" id="cou_object"></td>
+                        <td>客户经理：<input type="text" name="" id="manager" {{ $customer }}></td>
 
                     </tr>
                     <tr>
                         <th>总结：</th>
-                        <td colspan="4"><input id="remarks" name="remarks"></td>
+                        <td colspan="4"><input id="summary" name="remarks"></td>
                     </tr>
                     <tr>
                         <th>内容记录：</th>
-                        <td colspan="4"><textarea  id="cont" name="cont" style="width: 954px; height: 120px;"></textarea></td>
+                        <td colspan="4"><textarea  id="content" name="cont" style="width: 954px; height: 120px;"></textarea></td>
                     </tr>
                 </table>
 
@@ -96,7 +95,7 @@
                                 @endforeach
                             </select>
                         </td>
-                        <td>情况描述：<input type="text"></td>
+                        <td>情况描述：<input type="text" id="situation"></td>
 
                     </tr>
 
@@ -110,3 +109,4 @@
     </div>
 
 </div>
+<script src="{{ asset('scripts/tracking/add.js') }}"></script>

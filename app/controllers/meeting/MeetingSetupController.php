@@ -299,7 +299,7 @@ class MeetingSetupController extends \BaseController{
             $mee ->activity_finish_time=Input::get('ftime');
             $mee ->scale=Input::get('scale');
             $mee ->meetings_cycle=Input::get('cycle');
-            $mee ->the_active_state=Input::get('me_star');
+            //$mee ->the_active_state=Input::get('me_star');
             $mee ->editor=$editor;
             $mee ->remarks=Input::get('remarks');
 
