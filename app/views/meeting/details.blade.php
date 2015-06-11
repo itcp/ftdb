@@ -93,7 +93,9 @@
 
             </div>
             <div >
-                <a href="/mee/editor?id={{ $meet['id'] }}" class="editor">编辑</a>
+
+                <a href="/custra/add?id={{ $meet['id'] }}" class="in_gj btn btn-success addType right">跟进</a>
+                <a href="/mee/edit?id={{ $meet['id'] }}" class="in_gj btn btn-success editor right">编辑</a>
             </div>
         </form>
     </div>

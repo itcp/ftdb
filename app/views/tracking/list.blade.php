@@ -32,29 +32,31 @@
                 <th>最近报价情况</th>
                 <th>最近拜访情况</th>
                 <th>编辑人</th>
-                <th>备注</th>
+                <th>总结</th>
                 <th></th>
-                @for($i=0,$mu=count($tracar);$i<$mu;$i++)
+
+                @foreach($tracr as $tracar)
                     <tr>
 
-                        <td>{{ $tracar[$i]['customer'] }}</td>
-                        <td>{{ $tracar[$i]['manager']}}</td>
-                        <td>{{ $tracar[$i]['merchandiser'] }}</td>
+                        <td>{{ $tracar['customer'] }}</td>
+                        <td>{{ $tracar['manager']}}</td>
+                        <td>{{ $tracar['merchandiser'] }}</td>
 
-                        <td>{{ $tracar[$i]['price'] }}</td>
-                        <td>{{ $tracar[$i]['accepted'] }}</td>
+                        <td>{{ $tracar['price'] }}</td>
 
-                        <td>{{ $tracar[$i]['visit'] }}</td>
-                        <td>{{ $tracar[$i]['summary'] }}</td>
 
-                        <td>{{ $tracar[$i]['editor'] }}</td>
-                        <td>{{ $tracar[$i]['editor_time'] }}</td>
+                        <td>{{ $tracar['visit'] }}</td>
+
+
+                        <td>{{ $tracar['editor'] }}</td>
+                        <td>{{ $tracar['summary'] }}</td>
                         <td>
-                            <a href="/meetings?id={{ $tracar[$i]['id'] }}">查看详情</a>
-                            <a href="/mee/edit?id={{ $tracar[$i]['id'] }}">编辑</a>
+                            <a href="/trac/details?id={{ $tracar['id'] }}">查看详情</a>
+                            <a href="/trac/edit?id={{ $tracar['id'] }}">编辑</a>
                         </td>
                     </tr>
-                @endfor
+
+                @endforeach
 
             </table>
         </div>

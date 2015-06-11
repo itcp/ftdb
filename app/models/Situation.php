@@ -2,9 +2,9 @@
 
 class Situation extends \Eloquent {
 
-    protected $table = 'customers';
+    protected $table = 'situation';
 
     public $timestamps = false;
 
-    protected $fillable = ['id','tracking_id','type','content','editor_time'];
+    protected $fillable = ['id','tracking_id','type','stat','content','editor_time'];
 }

@@ -6,3 +6,6 @@
 #remarks {width:600px;}
 th {width:80px;}
 li { list-style-type: none;}
+
+/*   会议编辑页   */
+.in_gj { float:right; margin-left: 15px;}

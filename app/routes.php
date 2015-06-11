@@ -119,4 +119,8 @@ Route::group(array('before'=>'login_n','namespace'=>'CommunicationRecord'),funct
 Route::group(array('before'=>'login_n','namespace'=>'CustomerTracking'),function(){
     Route::get('custra','CustomerTrackingSetController@listView');
     Route::get('custra/add','CustomerTrackingSetController@addView');
+    Route::get('trac/details','CustomerTrackingSetController@details');
+    Route::get('trac/edit','CustomerTrackingSetController@editView');
+
+    Route::post('trac/poadd','CustomerTrackingSetController@add');
 });

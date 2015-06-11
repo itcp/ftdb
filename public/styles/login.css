@@ -1,0 +1,10 @@
+body{ background:#000;
+}
+.title { width:100%; height:200px; border-bottom:solid 1px #333;}
+.title .ftsw { width:900px; height:70px; margin:auto; margin-top:150px; color:#999; font-size:36px;}
+
+.container { width:300px; color:#06C;}
+.control-group { height:51px; }
+.control-group label { float:left; line-height:51px;}
+.control-group .controls input{float:left; margin:10px 0; line-height:20px; color:#000;}
+.btn-login { float:right; background:#0C6; color:#fff;}

@@ -123,7 +123,7 @@
 
             </div>
             <div >
-                <a href="/custra/add?id={{ $meetar['id'] }}" class="btn btn-success addType right">跟进</a>
+                <a href="/custra/add?id={{ $meetar['id'] }}" class="in_gj btn btn-success addType right">跟进</a>
                 <button  class="btn btn-success addType right" id="butadd">确认修改</button>
             </div>
         </form>

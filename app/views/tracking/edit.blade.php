@@ -28,7 +28,7 @@
         <form  >
             <div class="panel panel-default ">
                 <div class="panel-heading">
-                    <h2 class="panel-title">添加跟进 <input type="hidden" id="mid" value="{{ $mid }}"></h2>
+                    <h2 class="panel-title">添加跟进 <input type="hidden" id="mid" value="{{ $trid }}"></h2>
 
                 </div>
                 <table class="table">
@@ -43,17 +43,17 @@
                         <th>总结</th>
                     </tr>
                     <tr>
-                        <td><input type="text" {{ $act_name }} id="act_name"></td>
-                        <td><input type="text" id="cou_name"></td>
-                        <td><input type="text" {{ $customer }} id="salesman"></td>
-                        <td><input type="text" {{ $act_head }} id="act_head"></td>
-                        <td><input type="text" id="price"></td>
+                        <td><input type="text" value="{{ $tracar['meeting_name'] }}" id="act_name"></td>
+                        <td><input type="text" value="{{ $tracar['customer_name'] }}" id="cou_name"></td>
+                        <td><input type="text" value="{{ $tracar['customer_manager'] }}" id="salesman"></td>
+                        <td><input type="text" value="{{ $tracar['merchandiser'] }}" id="act_head"></td>
+                        <td><input type="text" value="{{ $tracar['contract_price'] }}" id="price"></td>
 
-                        <td><input type="text" id="summary"></td>
+                        <td><input type="text" value="{{ $tracar['summary_reason'] }}" id="summary"></td>
                     </tr>
 
                 </table>
-                </div>
+            </div>
             <div class="panel panel-default ">
                 <div class="panel-heading">
                     <h2 class="panel-title">添加拜访记录</h2>
@@ -63,11 +63,11 @@
                     <tr>
 
                         <td>拜访主题：
-                           <input type="text" id="acc_theme">
+                            <input type="text" id="acc_theme">
                         </td>
                         <td colspan="2">访问时间：<input id="bs_time" name="bf_time">-<input id="bf_time" name="bf_time"></td>
                         <td>拜访对象：<input type="text" name="" id="cou_object"></td>
-                        <td>客户经理：<input type="text" name="" id="manager" {{ $customer }}></td>
+                        <td>客户经理：<input type="text" name="" id="manager" ></td>
 
                     </tr>
                     <tr>
@@ -86,7 +86,7 @@
                 <table class="table">
 
                     <tr>
-                        <th>跟进情况</th>
+                        <th>添加跟进情况</th>
                         <td>状态：
                             <select id="stat"  name="stat" >
                                 <option value="">请选择</option>
@@ -109,4 +109,4 @@
     </div>
 
 </div>
-<script src="{{ asset('scripts/tracking/add.js') }}"></script>
+<script src="{{ asset('scripts/tracking/edit.js') }}"></script>
