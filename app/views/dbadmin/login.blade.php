@@ -1,6 +1,18 @@
+<!doctype html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <title>凤腾事务数据-登录</title>
 
-<div class="container">
+</head>
+<style>
 
+</style>
+<body>
+    <div class="title">
+
+    </div>
+   <div class="container">
     {{ Form::open(array('url'=>'admin/login')) }}
 
     @if ($errors->has('login'))
@@ -41,4 +53,5 @@
 
 </div>
 
-
+</body>
+</html>

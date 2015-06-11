@@ -63,7 +63,7 @@ class CustomerTrackingSetController extends \BaseController{
         }
 
         $this->layout->content= View::make('tracking.add')->with(array('statar'=>$statar,'act_name'=>$act_name));
-        $this->layout->content->act_head=$mid;
+        $this->layout->content->mid=$mid;
         $this->layout->content->company=$company;
         $this->layout->content->customer = $customer;
         $this->layout->content->act_head=$act_head;

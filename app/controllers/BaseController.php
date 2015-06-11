@@ -31,10 +31,12 @@ class BaseController extends Controller {
             if($identity === 1){
                 $this->layout->nav = View::make('_layouts.headnav');
                 $this->layout->nav->yy=Auth::user()->name;
+
                 $this->layout->nav->type = $setar;
             }else{
                 $this->layout->nav = View::make('_layouts.headnav2');
                 $this->layout->nav->yy=Auth::user()->name;
+
             }
 
 

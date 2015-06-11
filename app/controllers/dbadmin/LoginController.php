@@ -13,13 +13,26 @@ class LoginController extends \BaseController {
 	 */
 	public function postIndex()
     {
+        //$password = Hash::make(Input::get('password'));
+echo Input::get('username').'<br />88'.Input::get('password');
+/*
+        if (Auth::attempt(array('username' => Input::get('username'), 'password' => $password)))
+        {
+                return Redirect::to('home');
 
-        if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')), true))
+            return '登录不成功，请确认用户或密码！';
+        }
+/*
+        if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password'))))
         {
             return Redirect::to('home');
-        }
 
-	}
+            return '登录不成功，请确认用户或密码！';
+        }
+*/
+
+
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -29,7 +42,7 @@ class LoginController extends \BaseController {
 	 */
     public function getLogout()
     {
-        Sentry::logout();
+        Auth::logout();
         return Redirect::to('admin/login');
     }
 
